@@ -1,0 +1,14 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Timer</title>
+    <script>
+        function refresh() {
+            location.reload();
+        }
+    </script>
+</head>
+<body onload='setInterval(function(){refresh()}, 1000 );'>
+    <p>Server time: ${serverTime}</p>
+    <p>User ID: ${user}</p>
+</body>
+</html>
