@@ -2,15 +2,12 @@
  * Created by alexander on 15.02.14.
  */
 
-//import PageGenerator;
-import sun.security.util.Password;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.awt.*;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -63,25 +60,6 @@ public class Frontend extends HttpServlet {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             response.getWriter().println(PageGenerator.getPage("404.tml", new HashMap<String, Object>()));
         }
-
-/*
-        if (session.getAttribute("username") != null) {
-
-            Map<String, Object> pageVariables = new HashMap<>();
-            pageVariables.put("user", session.getAttribute("UserID"));
-            pageVariables.put("serverTime", getTime());
-
-            response.getWriter().println(PageGenerator.getPage("time.tml", pageVariables));
-        }
-        else {
-            //response.sendRedirect("/");
-            Map<String, Object> pageVariables = new HashMap<>();
-            response.getWriter().println(PageGenerator.getPage("index.tml", pageVariables));
-        }
-
-*/
-
-
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -101,17 +79,10 @@ public class Frontend extends HttpServlet {
             session.setAttribute("username", user.getUsername());
             session.setAttribute("password", user.getPassword());
 
-            //Map<String, Object> pageVariables = new HashMap<>();
-            //pageVariables.put("user", user.getID());
-            //pageVariables.put("serverTime", getTime());
             response.sendRedirect("/time");
-
-            //response.getWriter().println(PageGenerator.getPage("time.tml", pageVariables));
         }
-        else {
+        else
             response.sendRedirect("/");
-            //Map<String, Object> pageVariables = new HashMap<>();
-            //response.getWriter().println(PageGenerator.getPage("index.tml", pageVariables));
-        }
+
     }
 }
