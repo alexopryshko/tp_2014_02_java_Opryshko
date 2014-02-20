@@ -16,8 +16,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class Frontend extends HttpServlet {
 
-    private String login = "";
-    private String password = "";
+    Map<Long, User> users = new HashMap<>();
 
     private AtomicLong userIdGenerator = new AtomicLong();
 
@@ -31,22 +30,19 @@ public class Frontend extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        login = request.getParameter("login");
-        password = request.getParameter("password");
-
         response.setContentType("text/html;charset=utf-8");
         response.setStatus(HttpServletResponse.SC_OK);
         HttpSession session = request.getSession();
 
         if (request.getPathInfo().equals("/")) {
-            if (!AuthUser.isAuthentication(session))
+            if (!AuthUser.isAuthentication(users, session))
                 response.getWriter().println(PageGenerator.getPage("index.tml", new HashMap<String, Object>()));
             else
                 response.sendRedirect("/time");
         }
 
         else if (request.getPathInfo().equals("/time")) {
-            if (!AuthUser.isAuthentication(session))
+            if (!AuthUser.isAuthentication(users, session))
                 response.sendRedirect("/");
             else {
                 Map<String, Object> pageVariables = new HashMap<>();
@@ -72,12 +68,11 @@ public class Frontend extends HttpServlet {
         response.setStatus(HttpServletResponse.SC_OK);
 
         HttpSession session = request.getSession();
-        if (AuthUser.getUserByLogin(login, password)) {
+        if (AuthUser.isRegistered(login, password)) {
             User user = new User(userIdGenerator.getAndIncrement(), login, password);
 
             session.setAttribute("UserID", user.getID());
-            session.setAttribute("username", user.getUsername());
-            session.setAttribute("password", user.getPassword());
+            users.put(user.getID(), user);
 
             response.sendRedirect("/time");
         }
