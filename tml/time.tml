@@ -1,6 +1,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Timer</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/static/css/main.css"/>
     <script>
         function refresh() {
             location.reload();
@@ -8,7 +10,21 @@
     </script>
 </head>
 <body onload='setInterval(function(){refresh()}, 1000 );'>
-    <p>Server time: ${serverTime}</p>
-    <p>User ID: ${user}</p>
+    <nav class="navbar navbar-inverse" style="border-radius: 0px;" role="navigation">
+        <p class="navbar-text navbar-right nav-font" style="margin-right: 20px;"> ${user }
+            <a href="/escape" class="navbar-link" style="font-size: 15px !important;">
+                <span class="glyphicon glyphicon-log-out"></span>
+            </a>
+        </p>
+        <p class="navbar-text nav-font">Технокрафт</p>
+    </nav>
+    <dir class="row">
+        <dir class="col-md-6 col-md-offset-4" style="font-size: 50px;">
+            <p>Server time: ${serverTime}</p>
+            <p>User ID: ${UserID}</p>
+        </dir>
+    </dir>
+
+
 </body>
 </html>

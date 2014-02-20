@@ -46,11 +46,23 @@ public class Frontend extends HttpServlet {
                 response.sendRedirect("/");
             else {
                 Map<String, Object> pageVariables = new HashMap<>();
-                pageVariables.put("user", session.getAttribute("UserID"));
+                pageVariables.put("UserID", session.getAttribute("UserID"));
+                pageVariables.put("user", users.get(session.getAttribute("UserID")).getUsername());
                 pageVariables.put("serverTime", getTime());
                 response.getWriter().println(PageGenerator.getPage("time.tml", pageVariables));
             }
 
+        }
+
+        else if (request.getPathInfo().equals("/escape")) {
+            if (!AuthUser.isAuthentication(users, session))
+                response.sendRedirect("/");
+            else {
+                users.remove(users.get(session.getAttribute("UserID")));
+                session.removeAttribute("UserID");
+                userIdGenerator.decrementAndGet();
+                response.sendRedirect("/");
+            }
         }
         else {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
