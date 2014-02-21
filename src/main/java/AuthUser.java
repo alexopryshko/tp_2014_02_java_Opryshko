@@ -1,5 +1,6 @@
 import javax.servlet.http.HttpSession;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -7,8 +8,16 @@ import java.util.Map;
  */
 public class AuthUser {
     public static boolean isRegistered(String login, String password) {
-        String[] users = new String[]{"admin", "user", "AlexO"};
-        return Arrays.asList(users).contains(login);
+        Map<String, String> constUser = new HashMap<>();
+        constUser.put("admin", "admin");
+        constUser.put("user", "123");
+        constUser.put("AlexO", "5");
+
+        String temp = constUser.get(login);
+        if (temp != null && temp.equals(password))
+            return true;
+        else
+            return false;
     }
     public static boolean isAuthentication(Map<Long, User> users, HttpSession session) {
         if (users.get(session.getAttribute("UserID")) != null)
