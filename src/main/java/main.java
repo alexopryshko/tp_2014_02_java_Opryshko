@@ -11,7 +11,7 @@ import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.handler.ResourceHandler;
 
 
-public class main {
+public class Main {
     public static void main(String[] args) throws Exception {
 
         //Create server

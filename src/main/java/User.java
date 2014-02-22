@@ -2,26 +2,38 @@
  * Created by alexander on 19.02.14.
  */
 public class User {
-    private long UserId;
-    private String Username;
-    private String Password;
+    private final long userId;
+    private String username;
+    private String password;
 
     public User() {
-        UserId = 0;
-        Username = null;
-        Password = null;
+        userId = 0;
+        username = null;
+        password = null;
     }
-    public User(long id, String username, String password) {
-        UserId = id;
-        Username = username;
-        Password = password;
+    public User(long id_set, String username_set, String password_set) {
+        userId = id_set;
+        username = username_set;
+        password = password_set;
     }
-    //get method
-    public long getID() { return UserId; }
-    public String getUsername () { return Username; }
-    public String getPassword () { return Password; }
-    //set method
-    public void setID(long id) { UserId = id; }
-    public void setUsername (String username) { Username = username; }
-    public void setPassword (String password) { Password = password; }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username_set) {
+        username = username_set;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password_set) {
+        password = password_set;
+    }
 }

@@ -22,7 +22,6 @@ public class Frontend extends HttpServlet {
 
     private static String getTime() {
         Date date = new Date();
-        date.getTime();
         DateFormat formatter = new SimpleDateFormat("HH.mm.ss");
         return formatter.format(date);
     }
@@ -60,7 +59,6 @@ public class Frontend extends HttpServlet {
             else {
                 users.remove(users.get(session.getAttribute("UserID")));
                 session.removeAttribute("UserID");
-                userIdGenerator.decrementAndGet();
                 response.sendRedirect("/");
             }
         }
@@ -83,8 +81,8 @@ public class Frontend extends HttpServlet {
         if (AuthUser.isRegistered(login, password)) {
             User user = new User(userIdGenerator.getAndIncrement(), login, password);
 
-            session.setAttribute("UserID", user.getID());
-            users.put(user.getID(), user);
+            session.setAttribute("UserID", user.getUserId());
+            users.put(user.getUserId(), user);
 
             response.sendRedirect("/time");
         }

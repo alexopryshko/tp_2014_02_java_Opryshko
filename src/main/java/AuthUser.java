@@ -14,15 +14,9 @@ public class AuthUser {
         constUser.put("AlexO", "5");
 
         String temp = constUser.get(login);
-        if (temp != null && temp.equals(password))
-            return true;
-        else
-            return false;
+        return (temp != null && temp.equals(password));
     }
     public static boolean isAuthentication(Map<Long, User> users, HttpSession session) {
-        if (users.get(session.getAttribute("UserID")) != null)
-            return true;
-        else
-            return false;
+        return (users.get(session.getAttribute("UserID")) != null);
     }
 }
