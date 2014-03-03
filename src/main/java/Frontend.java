@@ -16,7 +16,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class Frontend extends HttpServlet {
 
-    Map<Long, User> users = new HashMap<>();
+    Map<Long, User> users = new HashMap<Long, User>();
 
     private AtomicLong userIdGenerator = new AtomicLong();
 
@@ -44,7 +44,7 @@ public class Frontend extends HttpServlet {
             if (!AuthUser.isAuthentication(users, session))
                 response.sendRedirect("/");
             else {
-                Map<String, Object> pageVariables = new HashMap<>();
+                Map<String, Object> pageVariables = new HashMap<String, Object>();
                 pageVariables.put("UserID", session.getAttribute("UserID"));
                 pageVariables.put("user", users.get(session.getAttribute("UserID")).getUsername());
                 pageVariables.put("serverTime", getTime());

@@ -22,9 +22,12 @@ public class PageGenerator {
         try {
             Template template = CFG.getTemplate(HTML_DIR + File.separator + filename);
             template.process(data, stream);
-        } catch (IOException | TemplateException e) {
+        } catch (IOException e)  {
+            e.printStackTrace();
+        } catch (TemplateException e) {
             e.printStackTrace();
         }
+
         return stream.toString();
     }
 }
