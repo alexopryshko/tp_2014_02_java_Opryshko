@@ -1,0 +1,63 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Авторизация</title>
+
+    <link rel="stylesheet" href="/static/css/bootstrap.css"/>
+
+</head>
+<body>
+
+<dir class="row">
+    <dir class="col-md-6 col-md-offset-3">
+        <div class="alert alert-danger" style="display: none" id="error">Такой пользователь уже существует</div>
+        <div class="alert alert-success" style="display: none" id="success">Регистрация прошла успешно,
+            через 2 секунды вы будете перенаправлены на главную страницу</div>
+
+        <label for="InputEmail1"><h1>Регистрация</h1></label>
+        <form id="registration" method = "post">
+            <div class="form-group">
+                <label for="InputEmail1">Имя пользователя</label>
+                <input id="InputEmail1" type="text" class="form-control" name="login" placeholder="Login"/>
+            </div>
+            <div class="form-group">
+                <label for="InputPassword1">Пароль</label>
+                <input id="InputPassword1" type="password" class="form-control" name="password" placeholder="Password"/>
+            </div>
+
+
+        </form>
+
+        <button class="btn btn-primary" id="buttonId">Регистрация</button>
+    </dir>
+</dir>
+<script src="/static/js/jquery.js"/>
+<script src="/static/js/bootstrap.min.js"></script>
+<script src="/static/js/bootstrap.js"></script>
+<script>
+    $(document).ready(function(){
+        $('#buttonId').click(function() {
+            $.ajax({
+                url: '/registration',
+                type: 'POST',
+                dataType: 'json',
+                data: $("#registration").serialize(),
+                success: function (jsonResponce) {
+                    if (jsonResponce.error) {
+                        $('#success').show();
+                        $('#registration').hide();
+                        setTimeout(function() { location.replace("/"); }, 2000);
+
+                    }
+                    else {
+                        $('#error').show();
+                    }
+                },
+
+            });
+
+        });
+    });
+</script>
+
+</body>
+</html>

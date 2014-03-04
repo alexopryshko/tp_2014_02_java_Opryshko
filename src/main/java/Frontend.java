@@ -3,6 +3,9 @@
  */
 
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -62,6 +65,14 @@ public class Frontend extends HttpServlet {
                 response.sendRedirect("/");
             }
         }
+
+        else if (request.getPathInfo().equals("/registration")) {
+            if (!AuthUser.isAuthentication(users, session))
+                response.getWriter().println(PageGenerator.getPage("registration.tml", new HashMap<String, Object>()));
+            else
+                response.sendRedirect("/time");
+        }
+
         else {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             response.getWriter().println(PageGenerator.getPage("404.tml", new HashMap<String, Object>()));
@@ -71,23 +82,63 @@ public class Frontend extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        HttpSession session = request.getSession();
+
+        if (AuthUser.isAuthentication(users, session)) {
+            response.setContentType("text/html;charset=utf-8");
+            response.setStatus(HttpServletResponse.SC_OK);
+            response.sendRedirect("/time");
+        }
+
         String login = request.getParameter("login");
         String password = request.getParameter("password");
 
-        response.setContentType("text/html;charset=utf-8");
-        response.setStatus(HttpServletResponse.SC_OK);
+        if (request.getPathInfo().equals("/login")) {
+            if (AuthUser.isRegistered(login, password)) {
+                User user = new User(userIdGenerator.getAndIncrement(), login, password);
 
-        HttpSession session = request.getSession();
-        if (AuthUser.isRegistered(login, password)) {
-            User user = new User(userIdGenerator.getAndIncrement(), login, password);
+                session.setAttribute("UserID", user.getUserId());
+                users.put(user.getUserId(), user);
 
-            session.setAttribute("UserID", user.getUserId());
-            users.put(user.getUserId(), user);
-
-            response.sendRedirect("/time");
+                response.sendRedirect("/time");
+            }
+            else
+                response.sendRedirect("/");
         }
-        else
-            response.sendRedirect("/");
+
+        else if (request.getPathInfo().equals("/registration")) {
+
+            JSONObject json = new JSONObject();
+            if (AuthUser.registration(login, password)) {
+                try {
+                    json.put("error", true);
+                }
+                catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                response.setContentType("application/json");
+                response.getWriter().write(json.toString());
+            }
+            else {
+
+                try {
+                    json.put("error", false);
+                }
+                catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                response.setContentType("application/json");
+                response.getWriter().write(json.toString());
+            }
+
+        }
+
+        else {
+            response.setContentType("text/html;charset=utf-8");
+            response.setStatus(HttpServletResponse.SC_OK);
+            response.sendRedirect("/error");
+        }
+
 
     }
 }
