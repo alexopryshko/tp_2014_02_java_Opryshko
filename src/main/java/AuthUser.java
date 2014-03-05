@@ -6,6 +6,7 @@ import java.util.Map;
 import database.ConnectToDB;
 import database.Executor;
 import database.ResultHandler;
+import org.mindrot.jbcrypt.BCrypt;
 
 
 /**
@@ -29,7 +30,7 @@ public class AuthUser {
                         return result.getString("password");
                     }
                     else {
-                        return "";
+                        return BCrypt.hashpw("", BCrypt.gensalt(12));
                     }
                 }
             });
@@ -45,7 +46,7 @@ public class AuthUser {
             e.printStackTrace();
         }
 
-        return password.equals(temp);
+        return BCrypt.checkpw(password, temp);
     }
 
     public static boolean isAuthentication(Map<Long, User> users, HttpSession session) {
@@ -55,35 +56,23 @@ public class AuthUser {
     public static boolean registration(String login, String password) {
         Connection connection = ConnectToDB.getConnection();
         Executor executor = new Executor();
-        Boolean temp = false;
-        try {
-            temp = executor.execQuery(connection, "select password from users where username='" + login + "';", new ResultHandler<Boolean>() {
-                public Boolean handle(ResultSet result) throws SQLException {
+        Boolean temp = true;
 
-                    if (!result.next()) {
-                        return true;
-                    }
-                    else {
-                        return false;
-                    }
-                }
-            });
+
+        String hashed = BCrypt.hashpw(password, BCrypt.gensalt(12));
+
+        Integer test = hashed.length();
+        System.out.append(test.toString());
+
+        try {
+            executor.execUpdate(connection, "insert into users (username, password,registration) values ('" +
+                        login + "','" +
+                        hashed + "', now());");
         }
         catch (SQLException e) {
             e.printStackTrace();
+            temp = false;
         }
-
-        if (temp) {
-            try {
-                executor.execUpdate(connection, "insert into users (username, password,registration) values ('" +
-                        login + "','" +
-                        password + "', now());");
-            }
-            catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-
         return temp;
     }
 

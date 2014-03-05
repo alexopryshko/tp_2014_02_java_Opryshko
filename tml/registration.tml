@@ -9,11 +9,10 @@
 
 <dir class="row">
     <dir class="col-md-6 col-md-offset-3">
+        <label for="InputEmail1"><h1>Регистрация</h1></label>
         <div class="alert alert-danger" style="display: none" id="error">Такой пользователь уже существует</div>
         <div class="alert alert-success" style="display: none" id="success">Регистрация прошла успешно,
             через 2 секунды вы будете перенаправлены на главную страницу</div>
-
-        <label for="InputEmail1"><h1>Регистрация</h1></label>
         <form id="registration" method = "post">
             <div class="form-group">
                 <label for="InputEmail1">Имя пользователя</label>
@@ -23,19 +22,20 @@
                 <label for="InputPassword1">Пароль</label>
                 <input id="InputPassword1" type="password" class="form-control" name="password" placeholder="Password"/>
             </div>
-
-
         </form>
 
         <button class="btn btn-primary" id="buttonId">Регистрация</button>
     </dir>
 </dir>
+
 <script src="/static/js/jquery.js"/>
 <script src="/static/js/bootstrap.min.js"></script>
 <script src="/static/js/bootstrap.js"></script>
 <script>
     $(document).ready(function(){
         $('#buttonId').click(function() {
+            $('#success').hide();
+            $('#error').hide();
             $.ajax({
                 url: '/registration',
                 type: 'POST',
@@ -45,8 +45,8 @@
                     if (jsonResponce.error) {
                         $('#success').show();
                         $('#registration').hide();
+                        $('#buttonId').hide();
                         setTimeout(function() { location.replace("/"); }, 2000);
-
                     }
                     else {
                         $('#error').show();
