@@ -94,16 +94,35 @@ public class Frontend extends HttpServlet {
         String password = request.getParameter("password");
 
         if (request.getPathInfo().equals("/login")) {
+
+            JSONObject json = new JSONObject();
             if (AuthUser.isRegistered(login, password)) {
+
                 User user = new User(userIdGenerator.getAndIncrement(), login, password);
 
                 session.setAttribute("UserID", user.getUserId());
                 users.put(user.getUserId(), user);
 
-                response.sendRedirect("/time");
+                try {
+                    json.put("error", true);
+                }
+                catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                response.setContentType("application/json");
+                response.getWriter().write(json.toString());
             }
-            else
-                response.sendRedirect("/");
+            else {
+
+                try {
+                    json.put("error", false);
+                }
+                catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                response.setContentType("application/json");
+                response.getWriter().write(json.toString());
+            }
         }
 
         else if (request.getPathInfo().equals("/registration")) {

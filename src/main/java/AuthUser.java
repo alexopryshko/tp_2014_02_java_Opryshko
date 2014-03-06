@@ -30,7 +30,7 @@ public class AuthUser {
                         return result.getString("password");
                     }
                     else {
-                        return BCrypt.hashpw("", BCrypt.gensalt(12));
+                        return "";
                     }
                 }
             });
@@ -45,6 +45,9 @@ public class AuthUser {
         catch (SQLException e) {
             e.printStackTrace();
         }
+
+        if (temp.equals(""))
+            return false;
 
         return BCrypt.checkpw(password, temp);
     }
@@ -70,9 +73,16 @@ public class AuthUser {
                         hashed + "', now());");
         }
         catch (SQLException e) {
-            e.printStackTrace();
             temp = false;
         }
+
+        try {
+            connection.close();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return temp;
     }
 

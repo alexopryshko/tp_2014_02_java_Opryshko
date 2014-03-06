@@ -13,6 +13,7 @@
         <div class="alert alert-danger" style="display: none" id="error">Такой пользователь уже существует</div>
         <div class="alert alert-success" style="display: none" id="success">Регистрация прошла успешно,
             через 2 секунды вы будете перенаправлены на главную страницу</div>
+        <div class="alert alert-danger" style="display: none" id="errorPaswd">Пароли не совпадают</div>
         <form id="registration" method = "post">
             <div class="form-group">
                 <label for="InputEmail1">Имя пользователя</label>
@@ -22,9 +23,13 @@
                 <label for="InputPassword1">Пароль</label>
                 <input id="InputPassword1" type="password" class="form-control" name="password" placeholder="Password"/>
             </div>
+            <div class="form-group">
+                <label for="InputPassword2">Повторите пораль</label>
+                <input id="InputPassword2" type="password" class="form-control" name="repassword" placeholder="Password"/>
+            </div>
         </form>
 
-        <button class="btn btn-primary" id="buttonId">Регистрация</button>
+        <button class="btn btn-default" id="buttonId">Регистрация</button>
     </dir>
 </dir>
 
@@ -36,6 +41,13 @@
         $('#buttonId').click(function() {
             $('#success').hide();
             $('#error').hide();
+            $('#errorPaswd').hide();
+
+            if ($('#InputPassword1').val() != $('#InputPassword2').val()) {
+                $('#errorPaswd').show();
+                return false;
+            }
+
             $.ajax({
                 url: '/registration',
                 type: 'POST',

@@ -20,8 +20,8 @@ public class ConnectToDB {
                     append("localhost:"). 			//host name
                     append("3306/").				//port
                     append("game?").    			//db name
-                    append("user=root&").			//login
-                    append("password=");		//password
+                    append("user=AlexO&").			//login
+                    append("password=pwd"); 		//password
 
             System.out.append("URL: " + url + "\n");
 
