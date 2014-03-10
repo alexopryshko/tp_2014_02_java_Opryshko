@@ -5,37 +5,46 @@ import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/**
- * Created by alexander on 03.03.14.
- */
 public class ConnectToDB {
-    public static Connection getConnection() {
+    private Connection connection;
+
+    public ConnectToDB(String type, String host, String port, String name, String login, String password) {
         try{
             DriverManager.registerDriver((Driver) Class.forName("com.mysql.jdbc.Driver").newInstance());
-
             StringBuilder url = new StringBuilder();
+            url.append(type).		    //db type
+                append(host). 			//host name
+                append(port).			//port
+                append(name).    		//db name
+                append(login).			//login
+                append(password); 		//password
+            connection = DriverManager.getConnection(url.toString());
 
-            url.
-                    append("jdbc:mysql://").		//db type
-                    append("localhost:"). 			//host name
-                    append("3306/").				//port
-                    append("game?").    			//db name
-                    append("user=AlexO&").			//login
-                    append("password=pwd"); 		//password
-
-            System.out.append("URL: " + url + "\n");
-
-            Connection connection = DriverManager.getConnection(url.toString());
-            return connection;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        } catch (SQLException |
+                InstantiationException |
+                IllegalAccessException |
+                ClassNotFoundException e) {
+            connection = null;
+            //e.printStackTrace();
         }
-        return null;
     }
+
+    public Connection getConnection() {
+
+
+
+        return connection;
+    }
+
+    public boolean closeConnection() {
+        try {
+            connection.close();
+            return true;
+        }
+        catch (SQLException e) {
+            return false;
+        }
+    }
+
+
 }

@@ -1,8 +1,4 @@
-/**
- * Created by alexander on 15.02.14.
- */
-
-
+import database.ConnectToDB;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,9 +15,15 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class Frontend extends HttpServlet {
 
-    Map<Long, User> users = new HashMap<Long, User>();
-
+    Map<Long, User> users = new HashMap<>();
     private AtomicLong userIdGenerator = new AtomicLong();
+    private ConnectToDB connectToDB =
+            new ConnectToDB("jdbc:mysql://",
+                            "localhost:",
+                            "3306/",
+                            "game?",
+                            "user=AlexO&",
+                            "password=pwd");
 
     private static String getTime() {
         Date date = new Date();
@@ -47,7 +49,7 @@ public class Frontend extends HttpServlet {
             if (!AuthUser.isAuthentication(users, session))
                 response.sendRedirect("/");
             else {
-                Map<String, Object> pageVariables = new HashMap<String, Object>();
+                Map<String, Object> pageVariables = new HashMap<>();
                 pageVariables.put("UserID", session.getAttribute("UserID"));
                 pageVariables.put("user", users.get(session.getAttribute("UserID")).getUsername());
                 pageVariables.put("serverTime", getTime());
@@ -60,7 +62,9 @@ public class Frontend extends HttpServlet {
             if (!AuthUser.isAuthentication(users, session))
                 response.sendRedirect("/");
             else {
-                users.remove(users.get(session.getAttribute("UserID")));
+                if (!users.isEmpty()) {
+                    users.remove(users.get(session.getAttribute("UserID")));
+                }
                 session.removeAttribute("UserID");
                 response.sendRedirect("/");
             }
@@ -96,7 +100,7 @@ public class Frontend extends HttpServlet {
         if (request.getPathInfo().equals("/login")) {
 
             JSONObject json = new JSONObject();
-            if (AuthUser.isRegistered(login, password)) {
+            if (AuthUser.isRegistered(login, password, connectToDB.getConnection())) {
 
                 User user = new User(userIdGenerator.getAndIncrement(), login, password);
 
@@ -128,7 +132,7 @@ public class Frontend extends HttpServlet {
         else if (request.getPathInfo().equals("/registration")) {
 
             JSONObject json = new JSONObject();
-            if (AuthUser.registration(login, password)) {
+            if (AuthUser.registration(login, password, connectToDB.getConnection())) {
                 try {
                     json.put("error", true);
                 }

@@ -14,12 +14,14 @@ import org.mindrot.jbcrypt.BCrypt;
  */
 public class AuthUser {
 
-    public static boolean isRegistered(String login, String password) {
-        if (login.isEmpty() || password.isEmpty()) {
+    public static boolean isRegistered(String login, String password, Connection connection) {
+        if (login == null || password == null) {
+            return false;
+        }
+        else if (login.isEmpty() || password.isEmpty()) {
             return false;
         }
 
-        Connection connection = ConnectToDB.getConnection();
         Executor executor = new Executor();
         String temp = new String();
         try {
@@ -39,13 +41,6 @@ public class AuthUser {
             e.printStackTrace();
         }
 
-        try {
-            connection.close();
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
-
         if (temp.equals(""))
             return false;
 
@@ -56,16 +51,12 @@ public class AuthUser {
         return (users.get(session.getAttribute("UserID")) != null);
     }
 
-    public static boolean registration(String login, String password) {
-        Connection connection = ConnectToDB.getConnection();
+    public static boolean registration(String login, String password, Connection connection) {
+
         Executor executor = new Executor();
         Boolean temp = true;
 
-
         String hashed = BCrypt.hashpw(password, BCrypt.gensalt(12));
-
-        Integer test = hashed.length();
-        System.out.append(test.toString());
 
         try {
             executor.execUpdate(connection, "insert into users (username, password,registration) values ('" +
@@ -74,13 +65,6 @@ public class AuthUser {
         }
         catch (SQLException e) {
             temp = false;
-        }
-
-        try {
-            connection.close();
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
         }
 
         return temp;
