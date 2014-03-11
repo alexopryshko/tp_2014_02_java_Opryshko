@@ -25,7 +25,6 @@ public class ConnectToDB {
                 IllegalAccessException |
                 ClassNotFoundException e) {
             connection = null;
-            //e.printStackTrace();
         }
     }
 
