@@ -47,10 +47,10 @@ public class AuthUser {
             e.printStackTrace();
         }
 
-        if (temp.equals(""))
-            return false;
 
-        return BCrypt.checkpw(password, temp);
+        return !temp.equals("") && BCrypt.checkpw(password, temp);
+
+
     }
 
     public boolean isAuthentication(Map<Long, User> users, HttpSession session) {

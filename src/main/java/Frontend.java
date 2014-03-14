@@ -156,11 +156,11 @@ public class Frontend extends HttpServlet {
         }
 
         else {
-            //response.setContentType("text/html;charset=utf-8");
-            //response.setStatus(HttpServletResponse.SC_OK);
-            //response.sendRedirect("/error");
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-            response.getWriter().println(PageGenerator.getPage("404.tml", new HashMap<String, Object>()));
+            response.setContentType("text/html;charset=utf-8");
+            response.setStatus(HttpServletResponse.SC_OK);
+            response.sendRedirect("/error");
+            //response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            //response.getWriter().println(PageGenerator.getPage("404.tml", new HashMap<String, Object>()));
         }
 
 

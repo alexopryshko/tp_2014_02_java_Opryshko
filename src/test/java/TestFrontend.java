@@ -1,8 +1,6 @@
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 import javax.servlet.http.*;
-
-import com.mysql.jdbc.NotUpdatable;
 import org.apache.commons.io.FileUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -160,6 +158,25 @@ public class TestFrontend {
         assertTrue(FileUtils.readFileToString(new File("static/testFile4.txt"), "UTF-8").equals(""));
     }
 
+    @Test
+    public void testDoGetCase7() throws Exception {
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        HttpServletResponse response = mock(HttpServletResponse.class);
+        HttpSession session = mock(HttpSession.class);
+        PrintWriter writer = new PrintWriter("static/testFile4.txt");
+
+        when(request.getPathInfo()).thenReturn("/error");
+        when(request.getSession()).thenReturn(session);
+
+        when(response.getWriter()).thenReturn(writer);
+
+        new Frontend().doGet(request, response);
+
+        writer.flush();
+        assertTrue(FileUtils.readFileToString(new File("static/testFile4.txt"), "UTF-8").
+        contains(PageGenerator.getPage("404.tml", new HashMap<String, Object>())));
+    }
+
 
 
     @Test
@@ -268,7 +285,7 @@ public class TestFrontend {
 
 
         writer.flush();
-        assertTrue(FileUtils.readFileToString(new File("static/testFile5.txt"), "UTF-8").
-                contains(PageGenerator.getPage("404.tml", new HashMap<String, Object>())));
+        assertTrue(FileUtils.readFileToString(new File("static/testFile5.txt"), "UTF-8").equals(""));
     }
+
 }

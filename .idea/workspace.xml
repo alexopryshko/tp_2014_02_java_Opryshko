@@ -2,16 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="41958f71-af89-46ef-b4c3-44cac879dc73" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/Main.java" afterPath="$PROJECT_DIR$/src/main/java/Main.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/TestUser.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/AuthUser.java" afterPath="$PROJECT_DIR$/src/main/java/AuthUser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/database/Executor.java" afterPath="$PROJECT_DIR$/src/main/java/database/Executor.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Frontend.java" afterPath="$PROJECT_DIR$/src/main/java/Frontend.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/PageGenerator.java" afterPath="$PROJECT_DIR$/src/main/java/PageGenerator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/database/ResultHandler.java" afterPath="$PROJECT_DIR$/src/main/java/database/ResultHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/TestAuthUser.java" afterPath="$PROJECT_DIR$/src/test/java/TestAuthUser.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/TestFrontend.java" afterPath="$PROJECT_DIR$/src/test/java/TestFrontend.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/User.java" afterPath="$PROJECT_DIR$/src/main/java/User.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/testFile4.txt" afterPath="$PROJECT_DIR$/static/testFile4.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/testFile5.txt" afterPath="$PROJECT_DIR$/static/testFile5.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Server.iws" />
@@ -24,7 +21,7 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/Server$All_in_tp_2014_02_java_Opryshko.coverage" NAME="All in tp_2014_02_java_Opryshko Coverage Results" MODIFIED="1394801772780" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Server$All_in_tp_2014_02_java_Opryshko.coverage" NAME="All in tp_2014_02_java_Opryshko Coverage Results" MODIFIED="1394811361073" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -83,7 +80,7 @@
       <file leaf-file-name="Frontend.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Frontend.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="94" column="0" selection-start="3559" selection-end="3559" vertical-scroll-proportion="0.0" vertical-offset="1168" max-vertical-offset="2610">
+            <state line="162" column="14" selection-start="5837" selection-end="5837" vertical-scroll-proportion="0.0" vertical-offset="1198" max-vertical-offset="2610">
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#3082#3083#0" expanded="true" />
@@ -93,10 +90,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PageGenerator.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="PageGenerator.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/PageGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="13" selection-start="263" selection-end="263" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="345">
+            <state line="25" column="0" selection-start="803" selection-end="803" vertical-scroll-proportion="0.49804688" vertical-offset="0" max-vertical-offset="512">
               <folding />
             </state>
           </provider>
@@ -105,16 +102,7 @@
       <file leaf-file-name="Main.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="13" selection-start="366" selection-end="366" vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="540">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ConnectToDB.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/database/ConnectToDB.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="27" selection-start="1118" selection-end="1118" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="705">
+            <state line="17" column="38" selection-start="665" selection-end="665" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="540">
               <folding />
             </state>
           </provider>
@@ -123,16 +111,16 @@
       <file leaf-file-name="User.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/User.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="13" selection-start="14" selection-end="14" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="465">
+            <state line="29" column="27" selection-start="586" selection-end="597" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="465">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AuthUser.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/AuthUser.java">
+      <file leaf-file-name="TestUser.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/TestUser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="56" column="0" selection-start="1583" selection-end="1583" vertical-scroll-proportion="0.0" vertical-offset="644" max-vertical-offset="1260">
+            <state line="28" column="56" selection-start="775" selection-end="775" vertical-scroll-proportion="0.0" vertical-offset="58" max-vertical-offset="780">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -140,10 +128,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestFrontend.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="TestFrontend.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/TestFrontend.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="271" column="12" selection-start="9669" selection-end="9669" vertical-scroll-proportion="0.7363281" vertical-offset="3688" max-vertical-offset="4200">
+            <state line="36" column="51" selection-start="1175" selection-end="1232" vertical-scroll-proportion="0.0" vertical-offset="150" max-vertical-offset="4455">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -178,15 +166,17 @@
         <option value="$PROJECT_DIR$/src/main/java/database/Executor.java" />
         <option value="$PROJECT_DIR$/src/main/java/database/ResultHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/Main.java" />
-        <option value="$PROJECT_DIR$/src/main/java/User.java" />
         <option value="$PROJECT_DIR$/src/main/java/PageGenerator.java" />
         <option value="$PROJECT_DIR$/src/main/java/database/ConnectToDB.java" />
-        <option value="$PROJECT_DIR$/src/main/java/AuthUser.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/static/testFile4.txt" />
         <option value="$PROJECT_DIR$/src/test/java/TestAuthUser.java" />
+        <option value="$PROJECT_DIR$/src/main/java/AuthUser.java" />
         <option value="$PROJECT_DIR$/src/main/java/Frontend.java" />
         <option value="$PROJECT_DIR$/src/test/java/TestFrontend.java" />
+        <option value="$PROJECT_DIR$/src/main/java/User.java" />
+        <option value="$PROJECT_DIR$/src/test/java/TestUser.java" />
+        <option value="$PROJECT_DIR$/src/test/java/TestMain.java" />
       </list>
     </option>
   </component>
@@ -442,52 +432,6 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <configuration default="false" name="TestConnectToDB" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="tp_2014_02_java_Opryshko" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="TestConnectToDB" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="TestAuthUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="tp_2014_02_java_Opryshko" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="TestAuthUser" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
     <configuration default="false" name="TestFrontend" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="tp_2014_02_java_Opryshko" />
@@ -538,6 +482,52 @@
       <patterns />
       <RunnerSettings RunnerId="Cover" />
       <ConfigurationWrapper RunnerId="Cover" />
+      <method />
+    </configuration>
+    <configuration default="false" name="TestUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="tp_2014_02_java_Opryshko" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="TestUser" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="TestMain" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="tp_2014_02_java_Opryshko" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="TestMain" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin" singleton="true">
@@ -753,18 +743,18 @@
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Application.Main" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.TestConnectToDB" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.TestAuthUser" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.TestFrontend" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.All in tp_2014_02_java_Opryshko" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.TestFrontend" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.All in tp_2014_02_java_Opryshko" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.TestUser" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.TestMain" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="JUnit.All in tp_2014_02_java_Opryshko" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.TestFrontend" />
-        <item index="2" class="java.lang.String" itemvalue="Application.Main" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.TestAuthUser" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.TestConnectToDB" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.TestMain" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.TestUser" />
+        <item index="3" class="java.lang.String" itemvalue="Application.Main" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.TestFrontend" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
@@ -832,12 +822,12 @@
       <workItem from="1394476926271" duration="37000" />
       <workItem from="1394526450741" duration="6618000" />
       <workItem from="1394549587324" duration="31000" />
-      <workItem from="1394791380785" duration="9853000" />
+      <workItem from="1394791380785" duration="13812000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="85644000" />
+    <option name="totallyTimeSpent" value="89603000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -941,22 +931,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/Frontend.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="65" selection-start="892" selection-end="892" vertical-scroll-proportion="0.0" vertical-offset="360" max-vertical-offset="645">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3082#3083#0" expanded="true" />
-            <element signature="e#3116#3117#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tml/index.tml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="45" selection-start="185" selection-end="185" vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="300" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tml/time.tml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="26" column="0" selection-start="887" selection-end="887" vertical-scroll-proportion="0.0" vertical-offset="390" max-vertical-offset="480" />
@@ -1163,40 +1137,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="0" selection-start="2023" selection-end="2023" vertical-scroll-proportion="0.7363281" vertical-offset="583" max-vertical-offset="1125">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/TestAuthUser.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="15" column="45" selection-start="330" selection-end="330" vertical-scroll-proportion="-0.11328125" vertical-offset="283" max-vertical-offset="870">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/PageGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="13" selection-start="263" selection-end="263" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="345">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="13" selection-start="366" selection-end="366" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="540">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/database/ConnectToDB.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="27" selection-start="1118" selection-end="1118" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="705">
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1207,16 +1153,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/User.java">
+    <entry file="file://$PROJECT_DIR$/static/testFile5.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="13" selection-start="14" selection-end="14" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="465">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="512">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="64" column="0" selection-start="2023" selection-end="2023" vertical-scroll-proportion="1.9631902" vertical-offset="0" max-vertical-offset="1125">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/database/ConnectToDB.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="25" selection-start="500" selection-end="500" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="705">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/AuthUser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="0" selection-start="1583" selection-end="1583" vertical-scroll-proportion="0.0" vertical-offset="644" max-vertical-offset="1260">
+        <state line="49" column="0" selection-start="1391" selection-end="1391" vertical-scroll-proportion="0.0" vertical-offset="345" max-vertical-offset="1260">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1225,7 +1185,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Frontend.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="94" column="0" selection-start="3559" selection-end="3559" vertical-scroll-proportion="0.0" vertical-offset="1168" max-vertical-offset="2610">
+        <state line="162" column="14" selection-start="5837" selection-end="5837" vertical-scroll-proportion="0.0" vertical-offset="2098" max-vertical-offset="2610">
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#3082#3083#0" expanded="true" />
@@ -1234,19 +1194,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/testFile5.txt">
+    <entry file="file://$PROJECT_DIR$/src/main/java/User.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="512">
+        <state line="29" column="27" selection-start="586" selection-end="597" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="465">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/TestUser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="56" selection-start="775" selection-end="775" vertical-scroll-proportion="0.0" vertical-offset="58" max-vertical-offset="780">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/PageGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="0" selection-start="803" selection-end="803" vertical-scroll-proportion="0.49804688" vertical-offset="0" max-vertical-offset="512">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/TestFrontend.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="271" column="12" selection-start="9669" selection-end="9669" vertical-scroll-proportion="0.7363281" vertical-offset="3688" max-vertical-offset="4200">
+        <state line="36" column="51" selection-start="1175" selection-end="1232" vertical-scroll-proportion="0.0" vertical-offset="150" max-vertical-offset="4455">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="38" selection-start="665" selection-end="665" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="540">
+          <folding />
         </state>
       </provider>
     </entry>
