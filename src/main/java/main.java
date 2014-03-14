@@ -1,7 +1,3 @@
-/**
- * Created by alexander on 15.02.14.
- */
-
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.ContextHandler;
 import org.eclipse.jetty.server.handler.HandlerList;

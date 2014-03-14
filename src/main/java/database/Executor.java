@@ -2,10 +2,6 @@ package database;
 
 import java.sql.*;
 
-
-/**
- * Created by alexander on 03.03.14.
- */
 public class Executor {
     public <T> T execQuery(Connection connection, String query, ResultHandler<T> handler)
             throws SQLException {

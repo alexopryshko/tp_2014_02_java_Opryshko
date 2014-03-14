@@ -1,6 +1,4 @@
-/**
- * Created by alexander on 19.02.14.
- */
+
 public class User {
     private final long userId;
     private String username;
@@ -23,10 +21,6 @@ public class User {
 
     public String getUsername() {
         return username;
-    }
-
-    public void setUsername(String username_set) {
-        username = username_set;
     }
 
     public String getPassword() {

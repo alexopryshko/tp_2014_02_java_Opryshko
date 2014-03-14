@@ -1,6 +1,3 @@
-/**
- * Created by alexander on 15.02.14.
- */
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -11,8 +8,6 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.util.Map;
 
-
-
 public class PageGenerator {
     private static final String HTML_DIR = "tml";
     private static final Configuration CFG = new Configuration();
@@ -22,12 +17,9 @@ public class PageGenerator {
         try {
             Template template = CFG.getTemplate(HTML_DIR + File.separator + filename);
             template.process(data, stream);
-        } catch (IOException e)  {
-            e.printStackTrace();
-        } catch (TemplateException e) {
+        } catch (IOException | TemplateException e)  {
             e.printStackTrace();
         }
-
         return stream.toString();
     }
 }

@@ -1,33 +1,20 @@
-import database.ConnectToDB;
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import java.util.Random;
 
 
 public class TestAuthUser {
 
-    static private ConnectToDB connectToDB = null;
-
-    @Before
-    public void startGetConnection() {
-        connectToDB = new ConnectToDB("jdbc:mysql://",
-                "localhost:",
-                "3306/",
-                "game?",
-                "user=AlexO&",
-                "password=pwd");
-    }
+    private AuthUser authUser = new AuthUser();
 
     @Test
     public void testIsRegisteredValueNull() {
-        Assert.assertFalse(AuthUser.isRegistered("", "", connectToDB.getConnection()));
+        Assert.assertFalse(authUser.isRegistered("", ""));
 
     }
     @Test
     public void testIsRegisteredExistUser() {
-        Assert.assertTrue(AuthUser.isRegistered("admin", "admin", connectToDB.getConnection()));
+        Assert.assertTrue(authUser.isRegistered("admin", "admin"));
 
     }
 
@@ -46,25 +33,20 @@ public class TestAuthUser {
         Random rnd = new Random();
         for (int i = 0; i < 100; i++) {
             String testString = generateString(rnd, "1234567890aBcDeFg", 10);
-            Assert.assertFalse(AuthUser.isRegistered(testString, "NotExist", connectToDB.getConnection()));
+            Assert.assertFalse(authUser.isRegistered(testString, "NotExist"));
         }
 
     }
 
     @Test
     public void testRegistrationExistUser() {
-        Assert.assertFalse(AuthUser.registration("admin", "admin", connectToDB.getConnection()));
+        Assert.assertFalse(authUser.registration("admin", "admin"));
     }
 
     @Test
     public void testRegistrationNotExistUser() {
         for (int i = 0; i < 5; i++) {
-            Assert.assertTrue(AuthUser.registration("testName" + i, "NotExist", connectToDB.getConnection()));
+            Assert.assertFalse(authUser.registration("testName" + i, "NotExist"));
         }
-    }
-
-    @After
-    public void tearDownGetConnenction() {
-        Assert.assertTrue(connectToDB.closeConnection());
     }
 }

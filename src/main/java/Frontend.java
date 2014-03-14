@@ -1,7 +1,5 @@
-import database.ConnectToDB;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,13 +15,7 @@ public class Frontend extends HttpServlet {
 
     Map<Long, User> users = new HashMap<>();
     private AtomicLong userIdGenerator = new AtomicLong();
-    private ConnectToDB connectToDB =
-            new ConnectToDB("jdbc:mysql://",
-                            "localhost:",
-                            "3306/",
-                            "game?",
-                            "user=AlexO&",
-                            "password=pwd");
+    private final AuthUser authUser = new AuthUser();
 
     private static String getTime() {
         Date date = new Date();
@@ -39,19 +31,20 @@ public class Frontend extends HttpServlet {
         HttpSession session = request.getSession();
 
         if (request.getPathInfo().equals("/")) {
-            if (!AuthUser.isAuthentication(users, session))
+            if (!authUser.isAuthentication(users, session))
                 response.getWriter().println(PageGenerator.getPage("index.tml", new HashMap<String, Object>()));
             else
                 response.sendRedirect("/time");
         }
 
         else if (request.getPathInfo().equals("/time")) {
-            if (!AuthUser.isAuthentication(users, session))
+            if (!authUser.isAuthentication(users, session))
                 response.sendRedirect("/");
             else {
+                Long temp = (Long)session.getAttribute("UserID");
                 Map<String, Object> pageVariables = new HashMap<>();
-                pageVariables.put("UserID", session.getAttribute("UserID"));
-                pageVariables.put("user", users.get(session.getAttribute("UserID")).getUsername());
+                pageVariables.put("UserID", temp);
+                pageVariables.put("user", users.get(temp).getUsername());
                 pageVariables.put("serverTime", getTime());
                 response.getWriter().println(PageGenerator.getPage("time.tml", pageVariables));
             }
@@ -59,11 +52,12 @@ public class Frontend extends HttpServlet {
         }
 
         else if (request.getPathInfo().equals("/escape")) {
-            if (!AuthUser.isAuthentication(users, session))
+            if (!authUser.isAuthentication(users, session))
                 response.sendRedirect("/");
             else {
                 if (!users.isEmpty()) {
-                    users.remove(users.get(session.getAttribute("UserID")));
+                    Long temp = (Long)session.getAttribute("UserID");
+                    users.remove(temp);
                 }
                 session.removeAttribute("UserID");
                 response.sendRedirect("/");
@@ -71,7 +65,7 @@ public class Frontend extends HttpServlet {
         }
 
         else if (request.getPathInfo().equals("/registration")) {
-            if (!AuthUser.isAuthentication(users, session))
+            if (!authUser.isAuthentication(users, session))
                 response.getWriter().println(PageGenerator.getPage("registration.tml", new HashMap<String, Object>()));
             else
                 response.sendRedirect("/time");
@@ -83,15 +77,20 @@ public class Frontend extends HttpServlet {
         }
     }
 
+    public void setUsers (Map<Long, User> users) {
+        this.users = users;
+    }
+
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
 
-        if (AuthUser.isAuthentication(users, session)) {
+        if (authUser.isAuthentication(users, session)) {
             response.setContentType("text/html;charset=utf-8");
             response.setStatus(HttpServletResponse.SC_OK);
             response.sendRedirect("/time");
+            return;
         }
 
         String login = request.getParameter("login");
@@ -100,7 +99,7 @@ public class Frontend extends HttpServlet {
         if (request.getPathInfo().equals("/login")) {
 
             JSONObject json = new JSONObject();
-            if (AuthUser.isRegistered(login, password, connectToDB.getConnection())) {
+            if (authUser.isRegistered(login, password)) {
 
                 User user = new User(userIdGenerator.getAndIncrement(), login, password);
 
@@ -132,7 +131,7 @@ public class Frontend extends HttpServlet {
         else if (request.getPathInfo().equals("/registration")) {
 
             JSONObject json = new JSONObject();
-            if (AuthUser.registration(login, password, connectToDB.getConnection())) {
+            if (authUser.registration(login, password)) {
                 try {
                     json.put("error", true);
                 }
@@ -157,9 +156,11 @@ public class Frontend extends HttpServlet {
         }
 
         else {
-            response.setContentType("text/html;charset=utf-8");
-            response.setStatus(HttpServletResponse.SC_OK);
-            response.sendRedirect("/error");
+            //response.setContentType("text/html;charset=utf-8");
+            //response.setStatus(HttpServletResponse.SC_OK);
+            //response.sendRedirect("/error");
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            response.getWriter().println(PageGenerator.getPage("404.tml", new HashMap<String, Object>()));
         }
 
 

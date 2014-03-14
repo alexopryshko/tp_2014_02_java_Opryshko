@@ -1,20 +1,26 @@
 import javax.servlet.http.HttpSession;
 import java.sql.*;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
+
 import database.ConnectToDB;
 import database.Executor;
 import database.ResultHandler;
 import org.mindrot.jbcrypt.BCrypt;
 
-
-/**
- * Created by alexander on 19.02.14.
- */
 public class AuthUser {
 
-    public static boolean isRegistered(String login, String password, Connection connection) {
+    private ConnectToDB connectToDB;
+
+    public AuthUser() {
+        connectToDB = new ConnectToDB("jdbc:mysql://",
+                "localhost:",
+                "3306/",
+                "game?",
+                "user=AlexO&",
+                "password=pwd");
+    }
+
+    public boolean isRegistered(String login, String password) {
         if (login == null || password == null) {
             return false;
         }
@@ -23,9 +29,9 @@ public class AuthUser {
         }
 
         Executor executor = new Executor();
-        String temp = new String();
+        String temp = "";
         try {
-            temp = executor.execQuery(connection, "select password from users where username='" + login + "';", new ResultHandler<String>() {
+            temp = executor.execQuery(connectToDB.getConnection(), "select password from users where username='" + login + "';", new ResultHandler<String>() {
                 public String handle(ResultSet result) throws SQLException {
 
                     if (result.next()) {
@@ -47,11 +53,12 @@ public class AuthUser {
         return BCrypt.checkpw(password, temp);
     }
 
-    public static boolean isAuthentication(Map<Long, User> users, HttpSession session) {
-        return (users.get(session.getAttribute("UserID")) != null);
+    public boolean isAuthentication(Map<Long, User> users, HttpSession session) {
+        Long temp = (Long)session.getAttribute("UserID");
+        return (users.get(temp) != null);
     }
 
-    public static boolean registration(String login, String password, Connection connection) {
+    public boolean registration(String login, String password) {
 
         Executor executor = new Executor();
         Boolean temp = true;
@@ -59,7 +66,7 @@ public class AuthUser {
         String hashed = BCrypt.hashpw(password, BCrypt.gensalt(12));
 
         try {
-            executor.execUpdate(connection, "insert into users (username, password,registration) values ('" +
+            executor.execUpdate(connectToDB.getConnection(), "insert into users (username, password,registration) values ('" +
                         login + "','" +
                         hashed + "', now());");
         }
