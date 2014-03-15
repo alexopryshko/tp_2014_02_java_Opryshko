@@ -55,9 +55,9 @@ public class UserDAO {
         Executor executor = new Executor();
         Boolean temp = true;
         try {
-            executor.execUpdate(connection, "insert into users (username, password,registration) values ('" +
+            executor.execUpdate(connection, "INSERT INTO users (username, password,registration) VALUES ('" +
                     username + "','" +
-                    hashed + "', now());");
+                    hashed + "', NOW());");
         }
         catch (SQLException e) {
             temp = false;

@@ -1,3 +1,5 @@
+package frontend;
+
 import account.AccountService;
 import account.User;
 import org.json.JSONException;
@@ -14,7 +16,15 @@ import java.util.*;
 
 public class Frontend extends HttpServlet {
 
-    private final AccountService accountService = new AccountService();
+    private final AccountService accountService;
+
+    public Frontend(){
+        accountService = new AccountService();
+    }
+
+    public Frontend(AccountService _accountService){
+        accountService  = _accountService;
+    }
 
     private static String getTime() {
         Date date = new Date();
@@ -52,59 +62,6 @@ public class Frontend extends HttpServlet {
         else {
             renderErrorPage(response);
         }
-
-
-        /*
-
-        if (request.getPathInfo().equals("/")) {
-            if (!accountService.isAuthentication(users, session))
-                response.getWriter().println(PageGenerator.getPage("index.tml", new HashMap<String, Object>()));
-            else
-                response.sendRedirect("/time");
-        }
-
-        else if (request.getPathInfo().equals("/time")) {
-            if (!accountService.isAuthentication(users, session))
-                response.sendRedirect("/");
-            else {
-                Long temp = (Long)session.getAttribute("UserID");
-                Map<String, Object> pageVariables = new HashMap<>();
-                pageVariables.put("UserID", temp);
-                pageVariables.put("user", users.get(temp).getUsername());
-                pageVariables.put("serverTime", getTime());
-                response.getWriter().println(PageGenerator.getPage("time.tml", pageVariables));
-            }
-
-        }
-
-        else if (request.getPathInfo().equals("/escape")) {
-            if (!accountService.isAuthentication(users, session))
-                response.sendRedirect("/");
-            else {
-                if (!users.isEmpty()) {
-                    Long temp = (Long)session.getAttribute("UserID");
-                    users.remove(temp);
-                }
-                session.removeAttribute("UserID");
-                response.sendRedirect("/");
-            }
-        }
-
-        else if (request.getPathInfo().equals("/registration")) {
-            if (!accountService.isAuthentication(users, session))
-                response.getWriter().println(PageGenerator.getPage("registration.tml", new HashMap<String, Object>()));
-            else
-                response.sendRedirect("/time");
-        }
-
-        else {
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-            response.getWriter().println(PageGenerator.getPage("404.tml", new HashMap<String, Object>()));
-        }*/
-    }
-
-    public void setUsers (Map<Long, User> users) {
-        //this.users = users;
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -171,11 +128,7 @@ public class Frontend extends HttpServlet {
             }
 
             else {
-                response.setContentType("text/html;charset=utf-8");
-                response.setStatus(HttpServletResponse.SC_OK);
                 response.sendRedirect("/error");
-                //response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-                //response.getWriter().println(PageGenerator.getPage("404.tml", new HashMap<String, Object>()));
             }
         }
     }
@@ -184,10 +137,16 @@ public class Frontend extends HttpServlet {
             throws ServletException, IOException
     {
         HttpSession session = request.getSession();
-        Long userID = (Long)session.getAttribute("UserID");
+        Long userID = (long)session.getAttribute("UserID");
         Map<String, Object> pageVariables = new HashMap<>();
         pageVariables.put("UserID", userID);
-        pageVariables.put("user", accountService.getAuthorizeUserByID(userID).getUsername());
+        User renderUser = accountService.getAuthorizeUserByID(userID);
+        if (renderUser != null) {
+            pageVariables.put("user", renderUser.getUsername());
+        }
+        else {
+            pageVariables.put("user", "test");
+        }
         pageVariables.put("serverTime", getTime());
         response.getWriter().println(PageGenerator.getPage("time.tml", pageVariables));
     }
@@ -214,13 +173,12 @@ public class Frontend extends HttpServlet {
             throws ServletException, IOException
     {
         HttpSession session = request.getSession();
-        Long userID = (long)session.getAttribute("UserID");
-        if (accountService.deAuthorizeUserByID(userID)) {
+        if (accountService.deAuthorizeUserByID(session.getAttribute("UserID"))) {
             session.removeAttribute("UserID");
             response.sendRedirect("/");
         }
         else {
-            System.out.append("error");
+            response.sendRedirect("/error");
         }
 
     }

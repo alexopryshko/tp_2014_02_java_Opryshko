@@ -3,6 +3,8 @@ import static org.mockito.Mockito.*;
 import javax.servlet.http.*;
 
 import account.User;
+import frontend.Frontend;
+import frontend.PageGenerator;
 import org.apache.commons.io.FileUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -74,7 +76,7 @@ public class TestFrontend {
 
         Frontend frontend = new Frontend();
 
-        frontend.setUsers(users);
+        //frontend.setUsers(users);
 
         frontend.doGet(request, response);
 
@@ -103,7 +105,7 @@ public class TestFrontend {
 
         Frontend frontend = new Frontend();
 
-        frontend.setUsers(users);
+        //frontend.setUsers(users);
 
         frontend.doGet(request, response);
 
@@ -132,7 +134,7 @@ public class TestFrontend {
 
         Frontend frontend = new Frontend();
 
-        frontend.setUsers(users);
+        //frontend.setUsers(users);
 
         frontend.doGet(request, response);
 
@@ -259,7 +261,7 @@ public class TestFrontend {
 
         Frontend frontend = new Frontend();
 
-        frontend.setUsers(users);
+        //frontend.setUsers(users);
 
         frontend.doPost(request, response);
 

@@ -1,9 +1,0 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title>404</title>
-</head>
-<body>
-    <p style="font-size: 20px">Sorry, page not found</p>
-</body>
-</html>
-
