@@ -1,6 +1,8 @@
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 import javax.servlet.http.*;
+
+import account.User;
 import org.apache.commons.io.FileUtils;
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -10,11 +10,9 @@ import org.eclipse.jetty.server.handler.ResourceHandler;
 public class Main {
     public static void main(String[] args) throws Exception {
 
-        //Create server
         Server server = new Server(8080);
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
 
-        //create servlet
         context.addServlet(new ServletHolder(new Frontend()), "/*");
 
         ResourceHandler resource_handler = new ResourceHandler();

@@ -1,3 +1,5 @@
+import account.AccountService;
+import account.User;
 import org.json.JSONException;
 import org.json.JSONObject;
 import javax.servlet.ServletException;
@@ -9,12 +11,9 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicLong;
 
 public class Frontend extends HttpServlet {
 
-    private Map<Long, User> users = new HashMap<>();
-    private final AtomicLong userIdGenerator = new AtomicLong();
     private final AccountService accountService = new AccountService();
 
     private static String getTime() {
@@ -29,6 +28,33 @@ public class Frontend extends HttpServlet {
         response.setContentType("text/html;charset=utf-8");
         response.setStatus(HttpServletResponse.SC_OK);
         HttpSession session = request.getSession();
+
+        if (accountService.isAuthorized(session.getAttribute("UserID"))) {
+            if (request.getPathInfo().equals("/escape")) {
+                logout(request, response);
+            }
+            else {
+                renderGamePage(request, response);
+            }
+        }
+        else if (request.getPathInfo().equals("/")) {
+            renderMainPage(response);
+        }
+        else if (request.getPathInfo().equals("/time")) {
+            response.sendRedirect("/");
+        }
+        else if (request.getPathInfo().equals("/escape")) {
+            response.sendRedirect("/");
+        }
+        else if (request.getPathInfo().equals("/registration")) {
+            renderRegistrationPage(response);
+        }
+        else {
+            renderErrorPage(response);
+        }
+
+
+        /*
 
         if (request.getPathInfo().equals("/")) {
             if (!accountService.isAuthentication(users, session))
@@ -74,11 +100,11 @@ public class Frontend extends HttpServlet {
         else {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             response.getWriter().println(PageGenerator.getPage("404.tml", new HashMap<String, Object>()));
-        }
+        }*/
     }
 
     public void setUsers (Map<Long, User> users) {
-        this.users = users;
+        //this.users = users;
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -86,83 +112,116 @@ public class Frontend extends HttpServlet {
 
         HttpSession session = request.getSession();
 
-        if (accountService.isAuthentication(users, session)) {
-            response.setContentType("text/html;charset=utf-8");
-            response.setStatus(HttpServletResponse.SC_OK);
+        if (accountService.isAuthorized(session.getAttribute("UserID"))) {
             response.sendRedirect("/time");
-            return;
         }
-
-        String login = request.getParameter("login");
-        String password = request.getParameter("password");
-
-        if (request.getPathInfo().equals("/login")) {
-
-            JSONObject json = new JSONObject();
-            if (accountService.isRegistered(login, password)) {
-
-                User user = new User(userIdGenerator.getAndIncrement(), login, password);
-
-                session.setAttribute("UserID", user.getUserId());
-                users.put(user.getUserId(), user);
-
-                try {
-                    json.put("error", true);
-                }
-                catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                response.setContentType("application/json");
-                response.getWriter().write(json.toString());
-            }
-            else {
-
-                try {
-                    json.put("error", false);
-                }
-                catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                response.setContentType("application/json");
-                response.getWriter().write(json.toString());
-            }
-        }
-
-        else if (request.getPathInfo().equals("/registration")) {
-
-            JSONObject json = new JSONObject();
-            if (accountService.registration(login, password)) {
-                try {
-                    json.put("error", true);
-                }
-                catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                response.setContentType("application/json");
-                response.getWriter().write(json.toString());
-            }
-            else {
-
-                try {
-                    json.put("error", false);
-                }
-                catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                response.setContentType("application/json");
-                response.getWriter().write(json.toString());
-            }
-
-        }
-
         else {
-            response.setContentType("text/html;charset=utf-8");
-            response.setStatus(HttpServletResponse.SC_OK);
-            response.sendRedirect("/error");
-            //response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-            //response.getWriter().println(PageGenerator.getPage("404.tml", new HashMap<String, Object>()));
-        }
+            String login = request.getParameter("login");
+            String password = request.getParameter("password");
+            JSONObject json = new JSONObject();
 
+            if (request.getPathInfo().equals("/login")) {
+                Long userID = accountService.userAuthentication(login, password);
+                if (userID != -1) {
+                    session.setAttribute("UserID", userID);
+                    try {
+                        json.put("error", true);
+                    }
+                    catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    response.setContentType("application/json");
+                    response.getWriter().write(json.toString());
+                }
+                else {
+                    try {
+                        json.put("error", false);
+                    }
+                    catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    response.setContentType("application/json");
+                    response.getWriter().write(json.toString());
+                }
+            }
+
+            else if (request.getPathInfo().equals("/registration")) {
+                if (accountService.userRegistration(login, password)) {
+                    try {
+                        json.put("error", true);
+                    }
+                    catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    response.setContentType("application/json");
+                    response.getWriter().write(json.toString());
+                }
+                else {
+
+                    try {
+                        json.put("error", false);
+                    }
+                    catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    response.setContentType("application/json");
+                    response.getWriter().write(json.toString());
+                }
+
+            }
+
+            else {
+                response.setContentType("text/html;charset=utf-8");
+                response.setStatus(HttpServletResponse.SC_OK);
+                response.sendRedirect("/error");
+                //response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                //response.getWriter().println(PageGenerator.getPage("404.tml", new HashMap<String, Object>()));
+            }
+        }
+    }
+
+    private void renderGamePage(HttpServletRequest request,HttpServletResponse response)
+            throws ServletException, IOException
+    {
+        HttpSession session = request.getSession();
+        Long userID = (Long)session.getAttribute("UserID");
+        Map<String, Object> pageVariables = new HashMap<>();
+        pageVariables.put("UserID", userID);
+        pageVariables.put("user", accountService.getAuthorizeUserByID(userID).getUsername());
+        pageVariables.put("serverTime", getTime());
+        response.getWriter().println(PageGenerator.getPage("time.tml", pageVariables));
+    }
+
+    private void renderMainPage(HttpServletResponse response)
+            throws ServletException, IOException
+    {
+        response.getWriter().println(PageGenerator.getPage("index.tml", new HashMap<String, Object>()));
+    }
+
+    private void renderRegistrationPage(HttpServletResponse response)
+            throws ServletException, IOException
+    {
+        response.getWriter().println(PageGenerator.getPage("registration.tml", new HashMap<String, Object>()));
+    }
+
+    private void renderErrorPage(HttpServletResponse response)
+            throws ServletException, IOException
+    {
+        response.getWriter().println(PageGenerator.getPage("404.tml", new HashMap<String, Object>()));
+    }
+
+    private void logout(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException
+    {
+        HttpSession session = request.getSession();
+        Long userID = (long)session.getAttribute("UserID");
+        if (accountService.deAuthorizeUserByID(userID)) {
+            session.removeAttribute("UserID");
+            response.sendRedirect("/");
+        }
+        else {
+            System.out.append("error");
+        }
 
     }
 }
