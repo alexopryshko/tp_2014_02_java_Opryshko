@@ -13,9 +13,9 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class Frontend extends HttpServlet {
 
-    Map<Long, User> users = new HashMap<>();
-    private AtomicLong userIdGenerator = new AtomicLong();
-    private final AuthUser authUser = new AuthUser();
+    private Map<Long, User> users = new HashMap<>();
+    private final AtomicLong userIdGenerator = new AtomicLong();
+    private final AccountService accountService = new AccountService();
 
     private static String getTime() {
         Date date = new Date();
@@ -31,14 +31,14 @@ public class Frontend extends HttpServlet {
         HttpSession session = request.getSession();
 
         if (request.getPathInfo().equals("/")) {
-            if (!authUser.isAuthentication(users, session))
+            if (!accountService.isAuthentication(users, session))
                 response.getWriter().println(PageGenerator.getPage("index.tml", new HashMap<String, Object>()));
             else
                 response.sendRedirect("/time");
         }
 
         else if (request.getPathInfo().equals("/time")) {
-            if (!authUser.isAuthentication(users, session))
+            if (!accountService.isAuthentication(users, session))
                 response.sendRedirect("/");
             else {
                 Long temp = (Long)session.getAttribute("UserID");
@@ -52,7 +52,7 @@ public class Frontend extends HttpServlet {
         }
 
         else if (request.getPathInfo().equals("/escape")) {
-            if (!authUser.isAuthentication(users, session))
+            if (!accountService.isAuthentication(users, session))
                 response.sendRedirect("/");
             else {
                 if (!users.isEmpty()) {
@@ -65,7 +65,7 @@ public class Frontend extends HttpServlet {
         }
 
         else if (request.getPathInfo().equals("/registration")) {
-            if (!authUser.isAuthentication(users, session))
+            if (!accountService.isAuthentication(users, session))
                 response.getWriter().println(PageGenerator.getPage("registration.tml", new HashMap<String, Object>()));
             else
                 response.sendRedirect("/time");
@@ -86,7 +86,7 @@ public class Frontend extends HttpServlet {
 
         HttpSession session = request.getSession();
 
-        if (authUser.isAuthentication(users, session)) {
+        if (accountService.isAuthentication(users, session)) {
             response.setContentType("text/html;charset=utf-8");
             response.setStatus(HttpServletResponse.SC_OK);
             response.sendRedirect("/time");
@@ -99,7 +99,7 @@ public class Frontend extends HttpServlet {
         if (request.getPathInfo().equals("/login")) {
 
             JSONObject json = new JSONObject();
-            if (authUser.isRegistered(login, password)) {
+            if (accountService.isRegistered(login, password)) {
 
                 User user = new User(userIdGenerator.getAndIncrement(), login, password);
 
@@ -131,7 +131,7 @@ public class Frontend extends HttpServlet {
         else if (request.getPathInfo().equals("/registration")) {
 
             JSONObject json = new JSONObject();
-            if (authUser.registration(login, password)) {
+            if (accountService.registration(login, password)) {
                 try {
                     json.put("error", true);
                 }

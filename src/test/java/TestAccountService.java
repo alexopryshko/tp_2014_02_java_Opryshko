@@ -3,18 +3,18 @@ import org.junit.Test;
 import java.util.Random;
 
 
-public class TestAuthUser {
+public class TestAccountService {
 
-    private AuthUser authUser = new AuthUser();
+    private AccountService accountService = new AccountService();
 
     @Test
     public void testIsRegisteredValueNull() {
-        Assert.assertFalse(authUser.isRegistered("", ""));
+        Assert.assertFalse(accountService.isRegistered("", ""));
 
     }
     @Test
     public void testIsRegisteredExistUser() {
-        Assert.assertTrue(authUser.isRegistered("admin", "admin"));
+        Assert.assertTrue(accountService.isRegistered("admin", "admin"));
 
     }
 
@@ -33,20 +33,20 @@ public class TestAuthUser {
         Random rnd = new Random();
         for (int i = 0; i < 100; i++) {
             String testString = generateString(rnd, "1234567890aBcDeFg", 10);
-            Assert.assertFalse(authUser.isRegistered(testString, "NotExist"));
+            Assert.assertFalse(accountService.isRegistered(testString, "NotExist"));
         }
 
     }
 
     @Test
     public void testRegistrationExistUser() {
-        Assert.assertFalse(authUser.registration("admin", "admin"));
+        Assert.assertFalse(accountService.registration("admin", "admin"));
     }
 
     @Test
     public void testRegistrationNotExistUser() {
         for (int i = 0; i < 5; i++) {
-            Assert.assertFalse(authUser.registration("testName" + i, "NotExist"));
+            Assert.assertTrue(accountService.registration("testName1" + i, "NotExist"));
         }
     }
 }

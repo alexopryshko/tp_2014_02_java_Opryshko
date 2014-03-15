@@ -7,11 +7,11 @@ import database.Executor;
 import database.ResultHandler;
 import org.mindrot.jbcrypt.BCrypt;
 
-public class AuthUser {
+public class AccountService {
 
-    private ConnectToDB connectToDB;
+    final private ConnectToDB connectToDB;
 
-    public AuthUser() {
+    public AccountService() {
         connectToDB = new ConnectToDB("jdbc:mysql://",
                 "localhost:",
                 "3306/",
@@ -47,10 +47,7 @@ public class AuthUser {
             e.printStackTrace();
         }
 
-
         return !temp.equals("") && BCrypt.checkpw(password, temp);
-
-
     }
 
     public boolean isAuthentication(Map<Long, User> users, HttpSession session) {
