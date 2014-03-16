@@ -10,8 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 
 public class TestUserAuthentication {
@@ -34,7 +33,7 @@ public class TestUserAuthentication {
         when(request.getParameter("login")).thenReturn("admin");
         when(request.getParameter("password")).thenReturn("admin");
         frontend.doPost(request, response);
-        Assert.assertTrue(stringWrite.toString().contains("true"));
+        verify(response, atLeastOnce()).sendRedirect("/time");
     }
 
     @Test
@@ -42,6 +41,6 @@ public class TestUserAuthentication {
         when(request.getParameter("login")).thenReturn("IncorrectData");
         when(request.getParameter("password")).thenReturn("IncorrectData");
         frontend.doPost(request, response);
-        Assert.assertTrue(stringWrite.toString().contains("false"));
+        Assert.assertTrue(stringWrite.toString().contains("Error in login or password"));
     }
 }

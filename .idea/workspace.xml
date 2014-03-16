@@ -2,12 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="41958f71-af89-46ef-b4c3-44cac879dc73" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/TestAccountService.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/TestConnectToDB.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/TestFrontend.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/frontend/Frontend.java" afterPath="$PROJECT_DIR$/src/main/java/frontend/Frontend.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/frontend/PageGenerator.java" afterPath="$PROJECT_DIR$/src/main/java/frontend/PageGenerator.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/frontend/TestFrontendRouting.java" afterPath="$PROJECT_DIR$/src/test/java/frontend/TestFrontendRouting.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/pageGenerator/TestPageGenerator.java" afterPath="$PROJECT_DIR$/src/test/java/pageGenerator/TestPageGenerator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/frontend/TestUserAuthentication.java" afterPath="$PROJECT_DIR$/src/test/java/frontend/TestUserAuthentication.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/frontend/TestUserRegistration.java" afterPath="$PROJECT_DIR$/src/test/java/frontend/TestUserRegistration.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tml/index.tml" afterPath="$PROJECT_DIR$/tml/index.tml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tml/registration.tml" afterPath="$PROJECT_DIR$/tml/registration.tml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tml/time.tml" afterPath="$PROJECT_DIR$/tml/time.tml" />
     </list>
     <ignored path="Server.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -19,7 +22,7 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/Server$All_in_tp_2014_02_java_Opryshko.coverage" NAME="All in tp_2014_02_java_Opryshko Coverage Results" MODIFIED="1394965923111" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Server$All_in_tp_2014_02_java_Opryshko.coverage" NAME="All in tp_2014_02_java_Opryshko Coverage Results" MODIFIED="1394976501681" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/Server$frontend_in_tp_2014_02_java_Opryshko.coverage" NAME="frontend in tp_2014_02_java_Opryshko Coverage Results" MODIFIED="1394912102485" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>frontend.*</FILTER>
     </SUITE>
@@ -74,7 +77,23 @@
       </breakpoint>
     </breakpoint_any>
     <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
-    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true" />
+    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
+      <breakpoint url="file://$PROJECT_DIR$/src/test/java/functionality/TestRegistration.java" line="52" class="functionality.TestRegistration" package="functionality">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+    </line_breakpoints>
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -84,10 +103,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="UserDAO.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/database/UserDAO.java">
+      <file leaf-file-name="Frontend.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/frontend/Frontend.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="53" column="30" selection-start="1798" selection-end="1809" vertical-scroll-proportion="0.0" vertical-offset="660" max-vertical-offset="1230">
+            <state line="77" column="63" selection-start="2500" selection-end="2500" vertical-scroll-proportion="0.0" vertical-offset="840" max-vertical-offset="2325">
               <folding />
             </state>
           </provider>
@@ -96,7 +115,16 @@
       <file leaf-file-name="TestPageGenerator.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/pageGenerator/TestPageGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="66" selection-start="1187" selection-end="1187" vertical-scroll-proportion="0.6191406" vertical-offset="148" max-vertical-offset="720">
+            <state line="25" column="95" selection-start="695" selection-end="695" vertical-scroll-proportion="0.35351562" vertical-offset="74" max-vertical-offset="675">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.tml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tml/index.tml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="2" column="15" selection-start="34" selection-end="38" vertical-scroll-proportion="-1.25" vertical-offset="0" max-vertical-offset="585">
               <folding />
             </state>
           </provider>
@@ -120,7 +148,6 @@
         <option value="$PROJECT_DIR$/tml/404.tml" />
         <option value="$PROJECT_DIR$/static/css/main.css" />
         <option value="$PROJECT_DIR$/src/main/java/main.java" />
-        <option value="$PROJECT_DIR$/tml/index.tml" />
         <option value="$PROJECT_DIR$/src/main/java/tests/testConnect.java" />
         <option value="$PROJECT_DIR$/src/main/java/tests/TestConnectToDB.java" />
         <option value="$PROJECT_DIR$/src/main/java/database/Executor.java" />
@@ -139,19 +166,26 @@
         <option value="$PROJECT_DIR$/src/main/java/database/ConnectToDB.java" />
         <option value="$PROJECT_DIR$/src/test/java/TestAccountService.java" />
         <option value="$PROJECT_DIR$/src/test/java/TestConnectToDB.java" />
-        <option value="$PROJECT_DIR$/tml/time.tml" />
         <option value="$PROJECT_DIR$/src/main/java/database/UserDAO.java" />
         <option value="$PROJECT_DIR$/src/main/java/Frontend.java" />
-        <option value="$PROJECT_DIR$/tml/registration.tml" />
         <option value="$PROJECT_DIR$/src/test/java/TestFrontend.java" />
-        <option value="$PROJECT_DIR$/src/main/java/frontend/Frontend.java" />
-        <option value="$PROJECT_DIR$/src/test/java/frontend/TestUserAuthentication.java" />
-        <option value="$PROJECT_DIR$/src/test/java/frontend/TestUserRegistration.java" />
-        <option value="$PROJECT_DIR$/src/test/java/frontend/TestFrontendRouting.java" />
         <option value="$PROJECT_DIR$/src/test/java/frontend/TestPostRouting.java" />
         <option value="$PROJECT_DIR$/src/test/java/accountService/TestAccountService.java" />
         <option value="$PROJECT_DIR$/src/main/java/account/AccountService.java" />
         <option value="$PROJECT_DIR$/src/test/java/accountService/TestUserDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/frontend/PageGenerator.java" />
+        <option value="$PROJECT_DIR$/src/test/java/functionality/functionalTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/functionality/FunctionalTest.java" />
+        <option value="$PROJECT_DIR$/tml/index.tml" />
+        <option value="$PROJECT_DIR$/src/test/java/frontend/TestFrontendRouting.java" />
+        <option value="$PROJECT_DIR$/src/main/java/frontend/Frontend.java" />
+        <option value="$PROJECT_DIR$/src/test/java/frontend/TestUserAuthentication.java" />
+        <option value="$PROJECT_DIR$/src/test/java/frontend/TestUserRegistration.java" />
+        <option value="$PROJECT_DIR$/tml/time.tml" />
+        <option value="$PROJECT_DIR$/src/test/java/functionality/TestAuthentication.java" />
+        <option value="$PROJECT_DIR$/src/test/java/functionality/TestRegistration.java" />
+        <option value="$PROJECT_DIR$/tml/registration.tml" />
+        <option value="$PROJECT_DIR$/src/test/java/functionality/TestFunctional.java" />
         <option value="$PROJECT_DIR$/src/test/java/pageGenerator/TestPageGenerator.java" />
       </list>
     </option>
@@ -305,6 +339,36 @@
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tp_2014_02_java_Opryshko" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="frontend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -397,18 +461,18 @@
     </key>
   </component>
   <component name="RunManager" selected="JUnit.All in tp_2014_02_java_Opryshko">
-    <configuration default="false" name="TestAccountService" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="TestAuthentication" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="accountService.*" />
+          <option name="PATTERN" value="functionality.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <module name="tp_2014_02_java_Opryshko" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="accountService" />
-      <option name="MAIN_CLASS_NAME" value="accountService.TestAccountService" />
+      <option name="PACKAGE_NAME" value="functionality" />
+      <option name="MAIN_CLASS_NAME" value="functionality.TestAuthentication" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -421,26 +485,30 @@
       </option>
       <envs />
       <patterns />
-      <RunnerSettings RunnerId="Cover" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
       <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Cover" />
+      <ConfigurationWrapper RunnerId="Debug" />
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <configuration default="false" name="accountService in tp_2014_02_java_Opryshko" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="TestRegistration" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="accountService.*" />
+          <option name="PATTERN" value="functionality.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <module name="tp_2014_02_java_Opryshko" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="accountService" />
-      <option name="MAIN_CLASS_NAME" />
+      <option name="PACKAGE_NAME" value="functionality" />
+      <option name="MAIN_CLASS_NAME" value="functionality.TestRegistration" />
       <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="package" />
+      <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -451,24 +519,30 @@
       </option>
       <envs />
       <patterns />
-      <RunnerSettings RunnerId="Cover" />
-      <ConfigurationWrapper RunnerId="Cover" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <configuration default="false" name="TestUserDAO" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="functionality in tp_2014_02_java_Opryshko" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="accountService.*" />
+          <option name="PATTERN" value="functionality.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <module name="tp_2014_02_java_Opryshko" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="accountService" />
-      <option name="MAIN_CLASS_NAME" value="accountService.TestUserDAO" />
+      <option name="PACKAGE_NAME" value="functionality" />
+      <option name="MAIN_CLASS_NAME" />
       <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="package" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -746,9 +820,9 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="JUnit.TestAccountService" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.accountService in tp_2014_02_java_Opryshko" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.TestUserDAO" />
+      <item index="0" class="java.lang.String" itemvalue="JUnit.TestAuthentication" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.TestRegistration" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.functionality in tp_2014_02_java_Opryshko" />
       <item index="3" class="java.lang.String" itemvalue="JUnit.All in tp_2014_02_java_Opryshko" />
       <item index="4" class="java.lang.String" itemvalue="JUnit.TestPageGenerator" />
     </list>
@@ -756,9 +830,9 @@
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="JUnit.All in tp_2014_02_java_Opryshko" />
         <item index="1" class="java.lang.String" itemvalue="JUnit.TestPageGenerator" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.TestUserDAO" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.accountService in tp_2014_02_java_Opryshko" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.TestAccountService" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.functionality in tp_2014_02_java_Opryshko" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.TestRegistration" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.TestAuthentication" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
@@ -831,12 +905,12 @@
       <workItem from="1394875322796" duration="138000" />
       <workItem from="1394875494561" duration="14245000" />
       <workItem from="1394908394658" duration="3625000" />
-      <workItem from="1394961941196" duration="3913000" />
+      <workItem from="1394961941196" duration="13293000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="117931000" />
+    <option name="totallyTimeSpent" value="127311000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -864,60 +938,32 @@
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35199004" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283582" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283582" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297568" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39800996" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295129" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329602" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297568" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295129" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329602" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297568" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31840795" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297568" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297568" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24248926" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3283582" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24248926" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283582" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329602" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
-    <layout-to-restore>
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35199004" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295129" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31840795" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24248926" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3283582" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283582" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329602" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39800996" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329602" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-    </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -940,47 +986,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="13" selection-start="769" selection-end="769" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="555">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tp_2014_02_java_Opryshko.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="34" selection-start="944" selection-end="944" vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="480" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="0" selection-start="1021" selection-end="1021" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="555">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tp_2014_02_java_Opryshko.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="480" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="0" selection-start="1021" selection-end="1021" vertical-scroll-proportion="0.0" vertical-offset="435" max-vertical-offset="555">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tp_2014_02_java_Opryshko.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="480" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tp_2014_02_java_Opryshko.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="34" selection-start="944" selection-end="944" vertical-scroll-proportion="0.3125" vertical-offset="0" max-vertical-offset="672" />
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/eclipse/jetty/jetty-server/9.1.0.M0/jetty-server-9.1.0.M0.jar!/org/eclipse/jetty/server/Response.class">
       <provider selected="true" editor-type-id="text-editor">
         <state line="113" column="31" selection-start="4813" selection-end="4813" vertical-scroll-proportion="0.3511628" vertical-offset="1529" max-vertical-offset="2850" />
@@ -1083,40 +1088,18 @@
         <state line="6" column="13" selection-start="162" selection-end="162" vertical-scroll-proportion="0.15400411" vertical-offset="0" max-vertical-offset="780" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/main/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="0" selection-start="435" selection-end="435" vertical-scroll-proportion="0.09664948" vertical-offset="0" max-vertical-offset="776">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tml/404.tml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2" column="14" selection-start="62" selection-end="65" vertical-scroll-proportion="-1.25" vertical-offset="0" max-vertical-offset="210" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tml/time.tml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="16" selection-start="62" selection-end="67" vertical-scroll-proportion="0.030737706" vertical-offset="15" max-vertical-offset="540" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tml/index.tml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="22" selection-start="62" selection-end="73" vertical-scroll-proportion="0.06147541" vertical-offset="0" max-vertical-offset="1020" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tml/registration.tml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="22" selection-start="62" selection-end="73" vertical-scroll-proportion="0.030737706" vertical-offset="15" max-vertical-offset="1215" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/account/User.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="22" column="63" selection-start="512" selection-end="512" vertical-scroll-proportion="0.5859375" vertical-offset="0" max-vertical-offset="540">
           <folding>
-            <element signature="e#488#489#0" expanded="true" />
-            <element signature="e#547#548#0" expanded="true" />
-            <element signature="e#578#579#0" expanded="true" />
+            <element signature="e#488#489#0" expanded="false" />
+            <element signature="e#547#548#0" expanded="false" />
+            <element signature="e#578#579#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1131,34 +1114,6 @@
         <state line="15" column="28" selection-start="833" selection-end="833" vertical-scroll-proportion="0.4617225" vertical-offset="17" max-vertical-offset="435" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/frontend/Frontend.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="72" column="40" selection-start="2304" selection-end="2308" vertical-scroll-proportion="0.0" vertical-offset="973" max-vertical-offset="2415">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/frontend/TestPostRouting.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="17" selection-start="17" selection-end="17" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="750">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/frontend/TestUserAuthentication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="26" selection-start="847" selection-end="847" vertical-scroll-proportion="0.25128865" vertical-offset="0" max-vertical-offset="776">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/frontend/TestFrontendRouting.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="42" selection-start="1550" selection-end="1550" vertical-scroll-proportion="0.0" vertical-offset="838" max-vertical-offset="1350">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/database/ResultHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="17" selection-start="94" selection-end="94" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="195">
@@ -1170,15 +1125,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="4" column="13" selection-start="52" selection-end="52" vertical-scroll-proportion="0.077319585" vertical-offset="0" max-vertical-offset="776">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/accountService/TestAccountService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="5" selection-start="613" selection-end="837" vertical-scroll-proportion="0.52734375" vertical-offset="195" max-vertical-offset="1410">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1198,9 +1144,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/frontend/TestUserRegistration.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/freemarker/freemarker/2.3.20/freemarker-2.3.20.jar!/freemarker/template/Configuration.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="55" selection-start="1018" selection-end="1018" vertical-scroll-proportion="0.41015625" vertical-offset="0" max-vertical-offset="705">
+        <state line="199" column="0" selection-start="9321" selection-end="9321" vertical-scroll-proportion="0.8628692" vertical-offset="2561" max-vertical-offset="3060">
           <folding />
         </state>
       </provider>
@@ -1212,25 +1158,159 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/freemarker/freemarker/2.3.20/freemarker-2.3.20.jar!/freemarker/template/Configuration.class">
+    <entry file="file://$PROJECT_DIR$/src/main/java/frontend/PageGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="199" column="0" selection-start="9321" selection-end="9321" vertical-scroll-proportion="0.8628692" vertical-offset="2561" max-vertical-offset="3060">
+        <state line="22" column="14" selection-start="751" selection-end="751" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="495">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/frontend/PageGenerator.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/main/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="0" selection-start="551" selection-end="551" vertical-scroll-proportion="0.5566406" vertical-offset="0" max-vertical-offset="512">
+        <state line="13" column="59" selection-start="457" selection-end="473" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="540">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/frontend/TestPostRouting.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="13" selection-start="367" selection-end="367" vertical-scroll-proportion="0.0" vertical-offset="58" max-vertical-offset="585">
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/frontend/TestFrontendRouting.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="8" selection-start="1552" selection-end="1602" vertical-scroll-proportion="0.0" vertical-offset="212" max-vertical-offset="1170">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tml/time.tml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="20" selection-start="815" selection-end="815" vertical-scroll-proportion="-12.5" vertical-offset="0" max-vertical-offset="540">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/seleniumhq/selenium/selenium-support/2.4.0/selenium-support-2.4.0.jar!/org/openqa/selenium/support/ui/FluentWait.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="555">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/seleniumhq/selenium/selenium-support/2.4.0/selenium-support-2.4.0.jar!/org/openqa/selenium/support/ui/WebDriverWait.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="11" selection-start="341" selection-end="341" vertical-scroll-proportion="0.25316456" vertical-offset="0" max-vertical-offset="474">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/frontend/TestUserRegistration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="51" column="62" selection-start="1958" selection-end="1958" vertical-scroll-proportion="1.1132812" vertical-offset="0" max-vertical-offset="705">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/accountService/TestAccountService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="4" selection-start="366" selection-end="608" vertical-scroll-proportion="0.234375" vertical-offset="60" max-vertical-offset="1335">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/frontend/TestUserAuthentication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="8" selection-start="1261" selection-end="1315" vertical-scroll-proportion="0.703125" vertical-offset="0" max-vertical-offset="615">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.11/junit-4.11.jar!/org/junit/runners/BlockJUnit4ClassRunner.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1425">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/functionality/TestAuthentication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="5" selection-start="1037" selection-end="1037" vertical-scroll-proportion="0.8957055" vertical-offset="207" max-vertical-offset="960">
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.11/junit-4.11.jar!/org/junit/runners/ParentRunner.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="25" selection-start="2400" selection-end="2400" vertical-scroll-proportion="0.35443038" vertical-offset="505" max-vertical-offset="1080">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.11/junit-4.11.jar!/org/junit/internal/runners/statements/RunAfters.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="16" selection-start="612" selection-end="612" vertical-scroll-proportion="-7.2" vertical-offset="0" max-vertical-offset="285">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tml/registration.tml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="34" selection-start="964" selection-end="964" vertical-scroll-proportion="0.44581282" vertical-offset="224" max-vertical-offset="630">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/functionality/TestRegistration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="52" column="0" selection-start="1185" selection-end="1185" vertical-scroll-proportion="0.0" vertical-offset="564" max-vertical-offset="1020">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/functionality/TestFunctional.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="65" column="49" selection-start="2363" selection-end="2363" vertical-scroll-proportion="0.6953125" vertical-offset="619" max-vertical-offset="1395">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2372#2843#0" expanded="true" />
+            <element signature="e#2828#2829#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.11/junit-4.11.jar!/org/junit/internal/runners/model/ReflectiveCallable.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="40" selection-start="388" selection-end="388" vertical-scroll-proportion="0.30800822" vertical-offset="0" max-vertical-offset="487">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/frontend/Frontend.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="77" column="63" selection-start="2500" selection-end="2500" vertical-scroll-proportion="0.0" vertical-offset="840" max-vertical-offset="2325">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tml/index.tml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="15" selection-start="34" selection-end="38" vertical-scroll-proportion="-1.25" vertical-offset="0" max-vertical-offset="585">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/pageGenerator/TestPageGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="66" selection-start="1187" selection-end="1187" vertical-scroll-proportion="0.6191406" vertical-offset="148" max-vertical-offset="720">
+        <state line="25" column="95" selection-start="695" selection-end="695" vertical-scroll-proportion="0.35351562" vertical-offset="74" max-vertical-offset="675">
           <folding />
         </state>
       </provider>

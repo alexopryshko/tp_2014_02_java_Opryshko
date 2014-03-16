@@ -35,7 +35,7 @@ public class TestFrontendRouting {
     public void testRoutingURLIndex() throws Exception {
         when(request.getPathInfo()).thenReturn("/");
         frontend.doGet(request, response);
-        Assert.assertTrue(stringWrite.toString().contains("Авторизация"));
+        Assert.assertTrue(stringWrite.toString().contains("Game"));
     }
 
     @Test
@@ -56,7 +56,7 @@ public class TestFrontendRouting {
     public void testRoutingURLRegistrationWithOutAuthorized() throws Exception {
         when(request.getPathInfo()).thenReturn("/registration");
         frontend.doGet(request, response);
-        Assert.assertTrue(stringWrite.toString().contains("Регистрация"));
+        Assert.assertTrue(stringWrite.toString().contains("Registration"));
     }
 
     @Test

@@ -13,8 +13,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class TestUserRegistration {
     private HttpServletRequest request = mock(HttpServletRequest.class);
@@ -42,7 +41,7 @@ public class TestUserRegistration {
         when(request.getParameter("login")).thenReturn("admin");
         when(request.getParameter("password")).thenReturn("admin");
         frontend.doPost(request, response);
-        Assert.assertTrue(stringWrite.toString().contains("false"));
+        Assert.assertTrue(stringWrite.toString().contains("Same user already exist"));
     }
 
     @Test
@@ -50,6 +49,6 @@ public class TestUserRegistration {
         when(request.getParameter("login")).thenReturn("correct" + getTime());
         when(request.getParameter("password")).thenReturn("correctData");
         frontend.doPost(request, response);
-        Assert.assertTrue(stringWrite.toString().contains("true"));
+        verify(response, atLeastOnce()).sendRedirect("/time");
     }
 }

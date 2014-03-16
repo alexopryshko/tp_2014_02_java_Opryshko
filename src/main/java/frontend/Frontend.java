@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.ws.Response;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -48,7 +49,7 @@ public class Frontend extends HttpServlet {
             }
         }
         else if (request.getPathInfo().equals("/")) {
-            renderMainPage(response);
+            renderMainPage(response, null);
         }
         else if (request.getPathInfo().equals("/time")) {
             response.sendRedirect("/");
@@ -57,7 +58,7 @@ public class Frontend extends HttpServlet {
             response.sendRedirect("/");
         }
         else if (request.getPathInfo().equals("/registration")) {
-            renderRegistrationPage(response);
+            renderRegistrationPage(response, null);
         }
         else {
             renderErrorPage(response);
@@ -75,54 +76,26 @@ public class Frontend extends HttpServlet {
         else {
             String login = request.getParameter("login");
             String password = request.getParameter("password");
-            JSONObject json = new JSONObject();
 
             if (request.getPathInfo().equals("/login")) {
                 Long userID = accountService.userAuthentication(login, password);
                 if (userID != -1) {
                     session.setAttribute("UserID", userID);
-                    try {
-                        json.put("error", true);
-                    }
-                    catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    response.setContentType("application/json");
-                    response.getWriter().write(json.toString());
+                    response.sendRedirect("/time");
                 }
                 else {
-                    try {
-                        json.put("error", false);
-                    }
-                    catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    response.setContentType("application/json");
-                    response.getWriter().write(json.toString());
+                    renderMainPage(response, "Error");
                 }
             }
 
             else if (request.getPathInfo().equals("/registration")) {
                 if (accountService.userRegistration(login, password)) {
-                    try {
-                        json.put("error", true);
-                    }
-                    catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    response.setContentType("application/json");
-                    response.getWriter().write(json.toString());
+                    Long userID = accountService.userAuthentication(login, password);
+                    session.setAttribute("UserID", userID);
+                    response.sendRedirect("/time");
                 }
                 else {
-
-                    try {
-                        json.put("error", false);
-                    }
-                    catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    response.setContentType("application/json");
-                    response.getWriter().write(json.toString());
+                    renderRegistrationPage(response, "error");
                 }
 
             }
@@ -151,16 +124,20 @@ public class Frontend extends HttpServlet {
         response.getWriter().println(PageGenerator.getPage("time.tml", pageVariables));
     }
 
-    private void renderMainPage(HttpServletResponse response)
+    private void renderMainPage(HttpServletResponse response, String result)
             throws ServletException, IOException
     {
-        response.getWriter().println(PageGenerator.getPage("index.tml", new HashMap<String, Object>()));
+        Map<String, Object> map = new HashMap<>();
+        map.put("error", result);
+        response.getWriter().println(PageGenerator.getPage("index.tml", map));
     }
 
-    private void renderRegistrationPage(HttpServletResponse response)
+    private void renderRegistrationPage(HttpServletResponse response, String result)
             throws ServletException, IOException
     {
-        response.getWriter().println(PageGenerator.getPage("registration.tml", new HashMap<String, Object>()));
+        Map<String, Object> map = new HashMap<>();
+        map.put("error", result);
+        response.getWriter().println(PageGenerator.getPage("registration.tml", map));
     }
 
     private void renderErrorPage(HttpServletResponse response)

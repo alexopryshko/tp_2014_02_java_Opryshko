@@ -11,12 +11,12 @@
 </head>
 <body onload='setInterval(function(){refresh()}, 1000 );'>
     <nav class="navbar navbar-inverse" style="border-radius: 0px;" role="navigation">
-        <p class="navbar-text navbar-right nav-font" style="margin-right: 20px;"> ${user }
+        <p class="navbar-text navbar-right nav-font" style="margin-right: 20px;" id="user"> ${user}
             <a href="/escape" class="navbar-link" style="font-size: 15px !important;">
                 <span class="glyphicon glyphicon-log-out"></span>
             </a>
         </p>
-        <p class="navbar-text nav-font">Технокрафт</p>
+        <p class="navbar-text nav-font">Technocraft</p>
     </nav>
     <dir class="row">
         <dir class="col-md-6 col-md-offset-4" style="font-size: 50px;">

@@ -1,6 +1,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Регистрация</title>
+    <title>Registration</title>
 
     <link rel="stylesheet" href="/static/css/bootstrap.css"/>
 
@@ -9,67 +9,28 @@
 
 <dir class="row">
     <dir class="col-md-6 col-md-offset-3">
-        <label for="InputEmail1"><h1>Регистрация</h1></label>
-        <div class="alert alert-danger" style="display: none" id="error">Такой пользователь уже существует</div>
-        <div class="alert alert-success" style="display: none" id="success">Регистрация прошла успешно,
-            через 2 секунды вы будете перенаправлены на главную страницу</div>
-        <div class="alert alert-danger" style="display: none" id="errorPaswd">Пароли не совпадают</div>
-        <form id="registration" method = "post">
+        <label for="InputEmail1"><h1>Registration</h1></label>
+
+        <#if error??>
+            <div class="alert alert-danger">Same user already exist</div>
+        </#if>
+
+        <form id="registration" method = "post" action="/registration">
             <div class="form-group">
-                <label for="InputEmail1">Имя пользователя</label>
+                <label for="InputEmail1">Login</label>
                 <input id="InputEmail1" type="text" class="form-control" name="login" placeholder="Login"/>
             </div>
             <div class="form-group">
-                <label for="InputPassword1">Пароль</label>
+                <label for="InputPassword1">Password</label>
                 <input id="InputPassword1" type="password" class="form-control" name="password" placeholder="Password"/>
             </div>
-            <div class="form-group">
-                <label for="InputPassword2">Повторите пораль</label>
-                <input id="InputPassword2" type="password" class="form-control" name="repassword" placeholder="Password"/>
-            </div>
+
+            <button type="submit" class="btn btn-default" id="buttonId" name="button">Sign up</button>
         </form>
 
-        <button class="btn btn-default" id="buttonId">Регистрация</button>
+
     </dir>
 </dir>
-
-<script src="/static/js/jquery.js"/>
-<script src="/static/js/bootstrap.min.js"></script>
-<script src="/static/js/bootstrap.js"></script>
-<script>
-    $(document).ready(function(){
-        $('#buttonId').click(function() {
-            $('#success').hide();
-            $('#error').hide();
-            $('#errorPaswd').hide();
-
-            if ($('#InputPassword1').val() != $('#InputPassword2').val()) {
-                $('#errorPaswd').show();
-                return false;
-            }
-
-            $.ajax({
-                url: '/registration',
-                type: 'POST',
-                dataType: 'json',
-                data: $("#registration").serialize(),
-                success: function (jsonResponce) {
-                    if (jsonResponce.error) {
-                        $('#success').show();
-                        $('#registration').hide();
-                        $('#buttonId').hide();
-                        setTimeout(function() { location.replace("/"); }, 2000);
-                    }
-                    else {
-                        $('#error').show();
-                    }
-                },
-
-            });
-
-        });
-    });
-</script>
 
 </body>
 </html>

@@ -20,7 +20,7 @@ public class PageGenerator {
             Template template = CFG.getTemplate(HTML_DIR + File.separator + filename);
             template.process(data, stream);
         } catch (IOException | TemplateException e)  {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         return stream.toString();
     }
