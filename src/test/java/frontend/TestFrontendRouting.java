@@ -12,8 +12,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 
 public class TestFrontendRouting {
@@ -43,14 +42,14 @@ public class TestFrontendRouting {
     public void testRoutingURLTimeWithOutAuthorized() throws Exception {
         when(request.getPathInfo()).thenReturn("/time");
         frontend.doGet(request, response);
-        Assert.assertTrue(stringWrite.toString().equals(""));
+        verify(response, atLeastOnce()).sendRedirect("/");
     }
 
     @Test
     public void testRoutingURLEscapeWithOutAuthorized() throws Exception {
         when(request.getPathInfo()).thenReturn("/escape");
         frontend.doGet(request, response);
-        Assert.assertTrue(stringWrite.toString().equals(""));
+        verify(response, atLeastOnce()).sendRedirect("/");
     }
 
     @Test
@@ -80,8 +79,6 @@ public class TestFrontendRouting {
         when(accountService.deAuthorizeUserByID(session.getAttribute("UserID"))).thenReturn(true);
         when(request.getPathInfo()).thenReturn("/escape");
         frontend.doGet(request, response);
-        Assert.assertTrue(stringWrite.toString().equals(""));
+        verify(response, atLeastOnce()).sendRedirect("/");
     }
-
-
 }
