@@ -15,16 +15,14 @@ import java.util.*;
 public class Frontend extends HttpServlet {
 
     private final AccountService accountService;
-    private static DateFormat formatter;
+    private static DateFormat formatter = new SimpleDateFormat("HH.mm.ss");
 
     public Frontend(){
         accountService = new AccountService();
-        formatter = new SimpleDateFormat("HH.mm.ss");
     }
 
     public Frontend(AccountService _accountService){
         accountService  = _accountService;
-        formatter = new SimpleDateFormat("HH.mm.ss");
     }
 
     private static String getTime() {
