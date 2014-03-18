@@ -39,29 +39,26 @@ public class AccountService {
         }
     }
 
-    public boolean isAuthorized(Object userIDObj) {
-        if (userIDObj == null)
+    public boolean isAuthorized(Long userID) {
+        if (userID == null)
             return false;
         else {
-            Long userID = (long)userIDObj;
             return users.containsKey(userID);
         }
     }
 
-    public User getAuthorizeUserByID(Object userIDObj) {
-        if (userIDObj == null)
+    public User getAuthorizeUserByID(Long userID) {
+        if (userID == null)
             return null;
         else {
-            Long userID = (long)userIDObj;
             return users.get(userID);
         }
     }
 
-    public boolean deAuthorizeUserByID(Object userIDObj) {
-        if (userIDObj == null)
+    public boolean deAuthorizeUserByID(Long userID) {
+        if (userID == null)
             return false;
         else {
-            Long userID = (long)userIDObj;
             if (!users.isEmpty()) {
                 users.remove(userID);
                 return true;

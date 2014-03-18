@@ -8,14 +8,8 @@ public class UserDAO {
     public UserDAO(String type, String host, String port, String name, String login, String password) {
         try{
             DriverManager.registerDriver((Driver) Class.forName("com.mysql.jdbc.Driver").newInstance());
-            StringBuilder url = new StringBuilder();
-            url.append(type).		    //db type
-                append(host). 			//host name
-                append(port).			//port
-                append(name).    		//db name
-                append(login).			//login
-                append(password); 		//password
-            connection = DriverManager.getConnection(url.toString());
+            String URL = type + host + port + name + login + password;
+            connection = DriverManager.getConnection(URL);
 
         } catch (SQLException |
                 InstantiationException |
@@ -27,7 +21,7 @@ public class UserDAO {
 
     public User getUserByUsername(String username) {
         Executor executor = new Executor();
-        String password = new String();
+        String password = null;
         try {
             password = executor.execQuery(connection, "SELECT password FROM users WHERE username='" + username + "';", new ResultHandler<String>() {
                 public String handle(ResultSet result) throws SQLException {

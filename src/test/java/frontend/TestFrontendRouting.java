@@ -4,6 +4,7 @@ import account.AccountService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import static frontend.Frontend.toLong;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -49,7 +50,7 @@ public class TestFrontendRouting {
     public void testRoutingURLEscapeWithOutAuthorized() throws Exception {
         when(request.getPathInfo()).thenReturn("/escape");
         frontend.doGet(request, response);
-        verify(response, atLeastOnce()).sendRedirect("/");
+        Assert.assertTrue(stringWrite.toString().contains("404"));
     }
 
     @Test
@@ -68,7 +69,7 @@ public class TestFrontendRouting {
 
     @Test
     public void testRoutingAnyURLWithAuthorized() throws Exception {
-        when(accountService.isAuthorized(session.getAttribute("UserID"))).thenReturn(true);
+        when(accountService.isAuthorized(toLong(session.getAttribute("UserID")))).thenReturn(true);
         when(request.getPathInfo()).thenReturn("/");
         frontend.doGet(request, response);
         Assert.assertTrue(stringWrite.toString().contains("Timer"));
@@ -76,7 +77,8 @@ public class TestFrontendRouting {
 
     @Test
     public void testRoutingURLEscapeWithAuthorized() throws Exception {
-        when(accountService.deAuthorizeUserByID(session.getAttribute("UserID"))).thenReturn(true);
+        when(accountService.isAuthorized(toLong(session.getAttribute("UserID")))).thenReturn(true);
+        when(accountService.deAuthorizeUserByID(toLong(session.getAttribute("UserID")))).thenReturn(true);
         when(request.getPathInfo()).thenReturn("/escape");
         frontend.doGet(request, response);
         verify(response, atLeastOnce()).sendRedirect("/");

@@ -2,6 +2,7 @@ package frontend;
 import account.AccountService;
 import org.junit.Before;
 import org.junit.Test;
+import static frontend.Frontend.toLong;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,7 +30,7 @@ public class TestPostRouting {
 
     @Test
     public void testRoutingWithAuthorizedUser() throws Exception {
-        when(accountService.isAuthorized(session.getAttribute("UserID"))).thenReturn(true);
+        when(accountService.isAuthorized(toLong(session.getAttribute("UserID")))).thenReturn(true);
         when(request.getPathInfo()).thenReturn("/");
         frontend.doPost(request, response);
         verify(response, atLeastOnce()).sendRedirect("/time");
