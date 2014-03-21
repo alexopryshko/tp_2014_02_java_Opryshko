@@ -9,9 +9,7 @@ import org.junit.Test;
 
 import java.util.Date;
 
-/**
- * Created by alexander on 16.03.14.
- */
+
 public class TestUserDAO {
     private UserDAO userDAO;
     private String correctData;
