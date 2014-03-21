@@ -3,23 +3,12 @@ import account.AccountService;
 import org.junit.Before;
 import org.junit.Test;
 import static frontend.Frontend.toLong;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 
 import static org.mockito.Mockito.*;
 
-public class TestPostRouting {
-    private HttpServletRequest request = mock(HttpServletRequest.class);
-    private HttpServletResponse response = mock(HttpServletResponse.class);
-    private HttpSession session = mock(HttpSession.class);
+public class TestPostRouting extends BasedFrontend {
     private AccountService accountService = mock(AccountService.class);
-    private StringWriter stringWrite = new StringWriter();
-    private PrintWriter writer = new PrintWriter(stringWrite);
     private Frontend frontend = new Frontend(accountService);
 
     @Before
