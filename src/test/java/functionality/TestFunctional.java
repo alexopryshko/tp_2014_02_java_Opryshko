@@ -9,6 +9,8 @@ import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -19,10 +21,20 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 public abstract class TestFunctional {
-    protected final int PORT = 8080;
-    protected Server server;
+    protected String login;
+    protected String password;
+    protected final static int PORT = 8080;
+    protected static Server server;
 
-    protected void setUp() throws Exception {
+    protected static String generateString(int length){
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < length; i++)
+            result.append((char) (65 + Math.random() * 25));
+        return result.toString();
+    }
+
+    @BeforeClass
+    public static void setUp() throws Exception {
         server = new Server(PORT);
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
 
@@ -41,11 +53,12 @@ public abstract class TestFunctional {
         server.setHandler(handlers);
 
         server.start();
-        //server.join();
+
 
     }
 
-    protected void clearUp() throws Exception {
+    @AfterClass
+    public static void clearUp() throws Exception {
         server.stop();
     }
 
