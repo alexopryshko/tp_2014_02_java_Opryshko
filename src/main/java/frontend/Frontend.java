@@ -25,7 +25,7 @@ public class Frontend extends HttpServlet {
         accountService  = _accountService;
     }
 
-    private static String getTime() {
+    public static String getTime() {
         return formatter.format(new Date());
     }
 

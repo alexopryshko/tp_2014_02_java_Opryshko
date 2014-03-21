@@ -9,10 +9,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
+import static frontend.Frontend.getTime;
 import static org.mockito.Mockito.*;
 
 public class TestUserRegistration {
@@ -22,12 +19,6 @@ public class TestUserRegistration {
     private StringWriter stringWrite = new StringWriter();
     private PrintWriter writer = new PrintWriter(stringWrite);
     private Frontend frontend = new Frontend();
-
-    private static String getTime() {
-        Date date = new Date();
-        DateFormat formatter = new SimpleDateFormat("DD.HH.mm.ss");
-        return formatter.format(date);
-    }
 
     @Before
     public void setUp() throws IOException {
