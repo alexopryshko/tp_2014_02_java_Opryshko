@@ -26,13 +26,6 @@ public abstract class TestFunctional {
     protected final static int PORT = 8080;
     protected static Server server;
 
-    protected static String generateString(int length){
-        StringBuilder result = new StringBuilder();
-        for (int i = 0; i < length; i++)
-            result.append((char) (65 + Math.random() * 25));
-        return result.toString();
-    }
-
     @BeforeClass
     public static void setUp() throws Exception {
         server = new Server(PORT);
@@ -53,8 +46,6 @@ public abstract class TestFunctional {
         server.setHandler(handlers);
 
         server.start();
-
-
     }
 
     @AfterClass

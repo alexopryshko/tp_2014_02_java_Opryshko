@@ -3,7 +3,7 @@ import account.AccountService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
+import static functionality.TestHelper.generateString;
 import java.util.Date;
 
 
@@ -13,14 +13,6 @@ public class TestAccountService {
     private int lengthString;
     private String correctString;
     private String passwd;
-
-
-    public static String generateString(int length){
-        StringBuilder result = new StringBuilder();
-        for (int i = 0; i < length; i++)
-            result.append((char) (65 + Math.random() * 25));
-        return result.toString();
-    }
 
     @Before
     public void setUp() {
