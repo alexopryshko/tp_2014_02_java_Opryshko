@@ -5,11 +5,11 @@ import java.sql.*;
 public class UserDAO {
     private Connection connection;
 
-    public UserDAO(String type, String host, String port, String name, String login, String password) {
+    public UserDAO(Connector connector) {
         try{
             DriverManager.registerDriver((Driver) Class.forName("com.mysql.jdbc.Driver").newInstance());
-            String URL = type + host + port + name + login + password;
-            connection = DriverManager.getConnection(URL);
+            //String URL = type + host + port + name + login + password;
+            connection = DriverManager.getConnection(connector.getConnectionString());
 
         } catch (SQLException |
                 InstantiationException |

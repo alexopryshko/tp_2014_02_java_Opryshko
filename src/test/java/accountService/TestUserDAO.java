@@ -1,6 +1,7 @@
 package accountService;
 
 import account.User;
+import database.SQLUtil;
 import database.UserDAO;
 import org.junit.After;
 import org.junit.Assert;
@@ -15,16 +16,9 @@ public class TestUserDAO {
     private String correctData;
     private String incorrectData;
 
-
-
     @Before
     public void setUp() {
-        userDAO = new UserDAO("jdbc:mysql://",
-                "localhost:",
-                "3306/",
-                "game?",
-                "user=AlexO&",
-                "password=pwd");
+        userDAO = new UserDAO(new SQLUtil());
         correctData = "testName1";
         incorrectData = "IncorrectData";
     }

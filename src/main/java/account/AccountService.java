@@ -2,6 +2,8 @@ package account;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
+
+import database.SQLUtil;
 import database.UserDAO;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -13,12 +15,7 @@ public class AccountService {
     private AtomicLong userIdGenerator;
 
     public AccountService() {
-        userDAO = new UserDAO("jdbc:mysql://",
-                "localhost:",
-                "3306/",
-                "game?",
-                "user=AlexO&",
-                "password=pwd");
+        userDAO = new UserDAO(new SQLUtil());
         users = new HashMap<>();
         userIdGenerator = new AtomicLong();
     }
@@ -40,11 +37,7 @@ public class AccountService {
     }
 
     public boolean isAuthorized(Long userID) {
-        if (userID == null)
-            return false;
-        else {
-            return users.containsKey(userID);
-        }
+        return userID != null && users.containsKey(userID);
     }
 
     public User getAuthorizeUserByID(Long userID) {
