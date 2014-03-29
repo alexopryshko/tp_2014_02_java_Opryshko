@@ -1,7 +1,7 @@
 package accountService;
 
 import account.User;
-import database.SQLUtil;
+import database.SQLConnector;
 import database.UserDAO;
 import org.junit.After;
 import org.junit.Assert;
@@ -18,7 +18,7 @@ public class TestUserDAO {
 
     @Before
     public void setUp() {
-        userDAO = new UserDAO(new SQLUtil());
+        userDAO = new UserDAO(new SQLConnector());
         correctData = "testName1";
         incorrectData = "IncorrectData";
     }

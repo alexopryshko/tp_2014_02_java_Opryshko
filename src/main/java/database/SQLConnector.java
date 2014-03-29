@@ -1,7 +1,7 @@
 package database;
 
 
-public class SQLUtil implements Connector {
+public class SQLConnector implements Connector {
     private final String type;
     private final String host;
     private final String port;
@@ -9,7 +9,7 @@ public class SQLUtil implements Connector {
     private final String login;
     private final String password;
 
-    public SQLUtil() {
+    public SQLConnector() {
         type =     "jdbc:mysql://";
         host =     "localhost:";
         port =     "3306/";

@@ -3,7 +3,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
-import database.SQLUtil;
+import database.SQLConnector;
 import database.UserDAO;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -15,7 +15,7 @@ public class AccountService {
     private AtomicLong userIdGenerator;
 
     public AccountService() {
-        userDAO = new UserDAO(new SQLUtil());
+        userDAO = new UserDAO(new SQLConnector());
         users = new HashMap<>();
         userIdGenerator = new AtomicLong();
     }
