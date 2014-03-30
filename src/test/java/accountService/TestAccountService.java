@@ -13,7 +13,7 @@ public class TestAccountService {
     private int lengthString;
     private String correctString;
     private String passwd;
-
+/*
     @Before
     public void setUp() {
         accountService = new AccountService();
@@ -65,7 +65,7 @@ public class TestAccountService {
     public void testDeAuthorizeUserByIDWithoutAuthorizeUser() {
         Assert.assertFalse(accountService.deAuthorizeUserByID((long) 0));
     }
-
+*/
     @Test
     public void testUserRegistrationWithCorrectData() {
         Assert.assertTrue(accountService.userRegistration(testString + new Date(), testString));

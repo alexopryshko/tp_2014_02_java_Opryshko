@@ -7,7 +7,7 @@ import static org.mockito.Mockito.*;
 
 public class TestUserAuthentication extends BasedFrontend {
 
-    private Frontend frontend = new Frontend();
+ /*   private Frontend frontend = new Frontend();
 
     @Before
     public void setUp() throws IOException {
@@ -31,4 +31,5 @@ public class TestUserAuthentication extends BasedFrontend {
         frontend.doPost(request, response);
         Assert.assertTrue(stringWrite.toString().contains("Error in login or password"));
     }
+    */
 }

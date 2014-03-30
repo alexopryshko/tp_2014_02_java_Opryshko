@@ -1,70 +1,58 @@
 package account;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicLong;
-
 import database.SQLConnector;
 import database.UserDAO;
+import helper.TimeHelper;
+import messageSystem.Address;
+import messageSystem.MessageSystem;
+import messageSystem.Subscriber;
 import org.mindrot.jbcrypt.BCrypt;
 
 
-public class AccountService {
+public class AccountService implements Subscriber, Runnable {
 
+    private Address address;
+    private MessageSystem messageSystem;
     private UserDAO userDAO;
-    private Map<Long, User> users;
-    private AtomicLong userIdGenerator;
 
-    public AccountService() {
+    public AccountService(MessageSystem messageSystem) {
         userDAO = new UserDAO(new SQLConnector());
-        users = new HashMap<>();
-        userIdGenerator = new AtomicLong();
+        this.messageSystem = messageSystem;
+        this.address = new Address();
+        messageSystem.addService(this);
+        messageSystem.getAddressService().setAccountService(address);
     }
 
-    public long userAuthentication(String username, String password) {
+
+    public long getUserID(String username, String password) {
         if (username == null || password == null || username.isEmpty() || password.isEmpty()) {
-            return -1;
+            return 0;
         }
-
-        User user = userDAO.getUserByUsername(username);
-        if (user != null && BCrypt.checkpw(password, user.getPassword())) {
-            user.setUserId(userIdGenerator.getAndIncrement());
-            users.put(user.getUserId(), user);
-            return user.getUserId();
+        if (userDAO.isRegistered(username, password)) {
+            return userDAO.getID(username);
         }
         else {
-            return -1;
-        }
-    }
-
-    public boolean isAuthorized(Long userID) {
-        return userID != null && users.containsKey(userID);
-    }
-
-    public User getAuthorizeUserByID(Long userID) {
-        if (userID == null)
-            return null;
-        else {
-            return users.get(userID);
-        }
-    }
-
-    public boolean deAuthorizeUserByID(Long userID) {
-        if (userID == null)
-            return false;
-        else {
-            if (!users.isEmpty()) {
-                users.remove(userID);
-                return true;
-            }
-            else {
-                return false;
-            }
+            return 0;
         }
     }
 
     public boolean userRegistration(String login, String password) {
+        TimeHelper.sleep(2000);
         String hashed = BCrypt.hashpw(password, BCrypt.gensalt(12));
         return userDAO.addNewUser(login, hashed);
     }
 
+    public void run(){
+        while(true){
+            messageSystem.execForSubscriber(this);
+            TimeHelper.sleep(10);
+        }
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public MessageSystem getMessageSystem(){
+        return messageSystem;
+    }
 }

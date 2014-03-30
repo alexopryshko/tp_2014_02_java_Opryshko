@@ -1,7 +1,9 @@
 package frontend;
 
-import account.AccountService;
-import account.User;
+import account.UserSession;
+import helper.TimeHelper;
+import messageSystem.*;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,18 +13,22 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
-public class Frontend extends HttpServlet {
+public class Frontend extends HttpServlet implements Subscriber, Runnable {
 
-    private final AccountService accountService;
     private static DateFormat formatter = new SimpleDateFormat("HH.mm.ss");
 
-    public Frontend(){
-        accountService = new AccountService();
-    }
+    private MessageSystem messageSystem;
+    private Address address;
 
-    public Frontend(AccountService _accountService){
-        accountService  = _accountService;
+    private Map<String, UserSession> users = new ConcurrentHashMap<>();
+    private Map<String, UserSession> usersToRegistration = new ConcurrentHashMap<>();
+
+    public Frontend(MessageSystem messageSystem){
+        address = new Address();
+        this.messageSystem = messageSystem;
+        messageSystem.addService(this);
     }
 
     public static String getTime() {
@@ -34,19 +40,13 @@ public class Frontend extends HttpServlet {
 
         response.setContentType("text/html;charset=utf-8");
         response.setStatus(HttpServletResponse.SC_OK);
-        HttpSession session = request.getSession();
-        String path = request.getPathInfo();
-        Object ID = session.getAttribute("UserID");
 
-        if (accountService.isAuthorized(toLong(ID))) {
-            if (path.equals("/escape")) {
-                logout(request, response);
-            }
-            else {
-                renderGamePage(request, response);
-            }
-        }
-        else {
+        String path = request.getPathInfo();
+        HttpSession session = request.getSession();
+        UserSession userSession = users.get(session.getId());
+        UserSession registrationUser = usersToRegistration.get(session.getId());
+
+        if (userSession == null) {
             switch (path) {
                 case "/":
                     renderPage("index.tml", response, null);
@@ -55,82 +55,109 @@ public class Frontend extends HttpServlet {
                     response.sendRedirect("/");
                     break;
                 case "/registration":
-                    renderPage("registration.tml", response, null);
+                    if (registrationUser == null) {
+                        renderPage("registration.tml", response, null);
+                        return;
+                    }
+                    if (registrationUser.getRegistrationStatus() == -1) {
+                        renderPage("info.tml", response, "Wait for registration");
+                        return;
+                    }
+                    if (registrationUser.getRegistrationStatus() == 0) {
+                        renderPage("registration.tml", response, "Error");
+                        return;
+                    }
+                    if (registrationUser.getRegistrationStatus() == 1) {
+                        response.sendRedirect("/");
+                        return;
+                    }
+
                     break;
                 default:
                     renderErrorPage(response);
                     break;
             }
+            return;
         }
+        if (userSession.getUserId() == null) {
+            renderPage("info.tml", response, "Wait for authorization");
+            return;
+        }
+        if (userSession.getUserId() == 0) {
+            renderPage("index.tml", response, "Error");
+            users.remove(userSession.getSessionId());
+            return;
+        }
+        if (path.equals("/escape")) {
+            logout(request, response);
+            return;
+        }
+        renderGamePage(response, userSession);
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        HttpSession session = request.getSession();
-        Object ID = session.getAttribute("UserID");
+        String login = request.getParameter("login");
+        String password = request.getParameter("password");
+        String sessionId = request.getSession().getId();
 
-        if (accountService.isAuthorized(toLong(ID))) {
-            response.sendRedirect("/time");
-        }
-        else {
-            String login = request.getParameter("login");
-            String password = request.getParameter("password");
-            String path = request.getPathInfo();
-            Long userID;
+        String path = request.getPathInfo();
 
-            switch (path) {
-                case "/login":
-                    userID = accountService.userAuthentication(login, password);
-                    if (userID != -1) {
-                        session.setAttribute("UserID", userID);
-                        response.sendRedirect("/time");
-                    }
-                    else {
-                        renderPage("index.tml", response, "Error");
-                    }
-                    break;
-                case "/registration":
-                    if (accountService.userRegistration(login, password)) {
-                        userID = accountService.userAuthentication(login, password);
-                        session.setAttribute("UserID", userID);
-                        response.sendRedirect("/time");
-                    }
-                    else {
-                        renderPage("registration.tml", response, "error");
-                    }
-                    break;
-                default:
-                    response.sendRedirect("/error");
-                    break;
-            }
-
+        switch (path) {
+            case "/login":
+                UserSession userSession = new UserSession(sessionId, login);
+                users.put(sessionId, userSession);
+                Address frontendAddress = getAddress();
+                Address accountServiceAddress = messageSystem.getAddressService().getAccountService();
+                messageSystem.sendMessage(new MsgGetUserID(frontendAddress, accountServiceAddress, login, password, sessionId));
+                response.setContentType("text/html;charset=utf-8");
+                response.setStatus(HttpServletResponse.SC_OK);
+                response.sendRedirect("/");
+                break;
+            case "/registration":
+                userSession = new UserSession(sessionId, login);
+                usersToRegistration.put(sessionId, userSession);
+                frontendAddress = getAddress();
+                accountServiceAddress = messageSystem.getAddressService().getAccountService();
+                messageSystem.sendMessage(new MsgAddNewUser(frontendAddress, accountServiceAddress, login, password, sessionId));
+                response.setContentType("text/html;charset=utf-8");
+                response.setStatus(HttpServletResponse.SC_OK);
+                response.sendRedirect("/registration");
+                break;
+            default:
+                response.sendRedirect("/error");
+                break;
         }
     }
 
-    public static Long toLong(Object value) {
-        try {
-            return (long)value;
+
+    public void setId(String sessionId, Long userId) {
+        UserSession userSession = users.get(sessionId);
+        if (userSession == null) {
+            System.out.append("Can't find user session for: ").append(sessionId);
+            return;
         }
-        catch (Exception e) {
-            return null;
-        }
+        userSession.setRegistrationStatus(1);
+        userSession.setUserId(userId);
     }
 
-    private void renderGamePage(HttpServletRequest request,HttpServletResponse response)
+    public void setRegistrationStatus(String sessionID, Integer responseStatus) {
+        UserSession userSession = usersToRegistration.get(sessionID);
+        if (userSession == null) {
+            System.out.append("Can't find user session for: ").append(sessionID);
+            return;
+        }
+        userSession.setRegistrationStatus(responseStatus);
+    }
+
+    private void renderGamePage(HttpServletResponse response, UserSession userSession)
             throws ServletException, IOException
     {
-        HttpSession session = request.getSession();
-        Long userID = toLong(session.getAttribute("UserID"));
+
         Map<String, Object> pageVariables = new HashMap<>();
-        pageVariables.put("UserID", userID);
-        User renderUser = accountService.getAuthorizeUserByID(userID);
-        if (renderUser != null) {
-            pageVariables.put("user", renderUser.getUsername());
-        }
-        else {
-            pageVariables.put("user", "test");
-        }
+        pageVariables.put("UserID", userSession.getUserId());
+        pageVariables.put("user", userSession.getName());
         pageVariables.put("serverTime", getTime());
         response.getWriter().println(PageGenerator.getPage("time.tml", pageVariables));
     }
@@ -154,14 +181,25 @@ public class Frontend extends HttpServlet {
             throws ServletException, IOException
     {
         HttpSession session = request.getSession();
-        Object ID = session.getAttribute("UserID");
-        if (accountService.deAuthorizeUserByID(toLong(ID))) {
-            session.removeAttribute("UserID");
+        UserSession userSession = users.get(session.getId());
+
+        if (userSession != null) {
+            users.remove(session.getId());
             response.sendRedirect("/");
         }
         else {
             response.sendRedirect("/error");
         }
+    }
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public void run() {
+        while (true) {
+            messageSystem.execForSubscriber(this);
+            TimeHelper.sleep(100);
+        }
     }
 }

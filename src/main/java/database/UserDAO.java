@@ -1,5 +1,7 @@
 package database;
-import account.User;
+import helper.TimeHelper;
+import org.mindrot.jbcrypt.BCrypt;
+
 import java.sql.*;
 
 public class UserDAO {
@@ -8,7 +10,6 @@ public class UserDAO {
     public UserDAO(Connector connector) {
         try{
             DriverManager.registerDriver((Driver) Class.forName("com.mysql.jdbc.Driver").newInstance());
-            //String URL = type + host + port + name + login + password;
             connection = DriverManager.getConnection(connector.getConnectionString());
 
         } catch (SQLException |
@@ -19,30 +20,56 @@ public class UserDAO {
         }
     }
 
-    public User getUserByUsername(String username) {
+    public boolean isRegistered (String username, String password) {
+        TimeHelper.sleep(2000);
         Executor executor = new Executor();
-        String password = null;
+        String password_db = null;
         try {
-            password = executor.execQuery(connection, "SELECT password FROM users WHERE username='" + username + "';", new ResultHandler<String>() {
-                public String handle(ResultSet result) throws SQLException {
-                    if (result.next()) {
-                        return result.getString("password");
-                    }
-                    else {
-                        return null;
-                    }
-                }
-            });
+            password_db = executor.execQuery(
+                    connection,
+                    "SELECT password FROM users WHERE username='" + username +  "';",
+                    new ResultHandler<String>()
+                    {
+                        public String handle(ResultSet result) throws SQLException {
+                            if (result.next()) {
+                                return result.getString("password");
+                            }
+                            else {
+                                return null;
+                            }
+                        }
+                    });
         }
         catch (SQLException e) {
             e.printStackTrace();
         }
+        return password_db != null && BCrypt.checkpw(password, password_db);
+    }
 
-        if (password != null)
-            return new User(0, username, password);
-        else {
-            return null;
+    public Integer getID(String username) {
+        TimeHelper.sleep(2000);
+        Executor executor = new Executor();
+        Integer id = 0;
+        try {
+            id = executor.execQuery(
+                    connection,
+                    "SELECT id FROM users WHERE username='" + username + "';",
+                    new ResultHandler<Integer>()
+                    {
+                        public Integer handle(ResultSet result) throws SQLException {
+                            if (result.next()) {
+                                return result.getInt("id");
+                            }
+                            else {
+                                return 0;
+                            }
+                        }
+                    });
         }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id;
     }
 
     public boolean addNewUser(String username, String hashed) {

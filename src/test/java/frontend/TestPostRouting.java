@@ -8,7 +8,7 @@ import java.io.IOException;
 import static org.mockito.Mockito.*;
 
 public class TestPostRouting extends BasedFrontend {
-    private AccountService accountService = mock(AccountService.class);
+  /*  private AccountService accountService = mock(AccountService.class);
     private Frontend frontend = new Frontend(accountService);
 
     @Before
@@ -30,5 +30,5 @@ public class TestPostRouting extends BasedFrontend {
         when(request.getPathInfo()).thenReturn("/error");
         frontend.doPost(request, response);
         verify(response, atLeastOnce()).sendRedirect("/error");
-    }
+    }*/
 }

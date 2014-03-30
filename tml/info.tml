@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<head>
+    <title>Game</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css"/>
+    <script>
+        function refresh() {
+            location.reload();
+        }
+    </script>
+</head>
+<body onload='setInterval(function(){refresh()}, 1000 );'>
+<dir class="row" style="margin-top: 25px;">
+    <dir class="col-md-6 col-md-offset-3">
+
+        <div class="error"><div class="alert alert-info"><h1>${error}</h1></div></div>
+
+    </dir>
+</dir>
+</body>
+</html>

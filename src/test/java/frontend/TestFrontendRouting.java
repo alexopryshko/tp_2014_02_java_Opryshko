@@ -10,7 +10,7 @@ import static org.mockito.Mockito.*;
 
 
 public class TestFrontendRouting extends BasedFrontend {
-    private AccountService accountService = mock(AccountService.class);
+/*    private AccountService accountService = mock(AccountService.class);
     private Frontend frontend = new Frontend(accountService);
 
     @Before
@@ -70,5 +70,5 @@ public class TestFrontendRouting extends BasedFrontend {
         when(request.getPathInfo()).thenReturn("/escape");
         frontend.doGet(request, response);
         verify(response, atLeastOnce()).sendRedirect("/");
-    }
+    }*/
 }

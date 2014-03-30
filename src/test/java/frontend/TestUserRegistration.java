@@ -8,7 +8,7 @@ import static frontend.Frontend.getTime;
 import static org.mockito.Mockito.*;
 
 public class TestUserRegistration extends BasedFrontend {
-    private Frontend frontend = new Frontend();
+ /*   private Frontend frontend = new Frontend();
 
     @Before
     public void setUp() throws IOException {
@@ -31,5 +31,5 @@ public class TestUserRegistration extends BasedFrontend {
         when(request.getParameter("password")).thenReturn("correctData");
         frontend.doPost(request, response);
         verify(response, atLeastOnce()).sendRedirect("/time");
-    }
+    }*/
 }
