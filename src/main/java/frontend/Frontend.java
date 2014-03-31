@@ -68,10 +68,10 @@ public class Frontend extends HttpServlet implements Subscriber, Runnable {
                         return;
                     }
                     if (registrationUser.getRegistrationStatus() == 1) {
+                        usersToRegistration.remove(registrationUser.getSessionId());
                         response.sendRedirect("/");
                         return;
                     }
-
                     break;
                 default:
                     renderErrorPage(response);
@@ -86,10 +86,6 @@ public class Frontend extends HttpServlet implements Subscriber, Runnable {
         if (userSession.getUserId() == 0) {
             renderPage("index.tml", response, "Error");
             users.remove(userSession.getSessionId());
-            return;
-        }
-        if (path.equals("/escape")) {
-            logout(request, response);
             return;
         }
         renderGamePage(response, userSession);
@@ -175,21 +171,6 @@ public class Frontend extends HttpServlet implements Subscriber, Runnable {
             throws ServletException, IOException
     {
         response.getWriter().println(PageGenerator.getPage("404.tml", new HashMap<String, Object>()));
-    }
-
-    private void logout(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
-    {
-        HttpSession session = request.getSession();
-        UserSession userSession = users.get(session.getId());
-
-        if (userSession != null) {
-            users.remove(session.getId());
-            response.sendRedirect("/");
-        }
-        else {
-            response.sendRedirect("/error");
-        }
     }
 
     public Address getAddress() {
