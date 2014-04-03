@@ -2,7 +2,7 @@ package messageSystem;
 import frontend.Frontend;
 
 public abstract class MessageToFrontend extends Message{
-    public MessageToFrontend(Address from, Address to) {
+    public MessageToFrontend(Class from, Class to) {
         super(from, to);
     }
 

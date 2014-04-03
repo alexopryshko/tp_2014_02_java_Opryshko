@@ -2,7 +2,6 @@ package account;
 import database.SQLConnector;
 import database.UserDAO;
 import helper.TimeHelper;
-import messageSystem.Address;
 import messageSystem.MessageSystem;
 import messageSystem.Subscriber;
 import org.mindrot.jbcrypt.BCrypt;
@@ -10,19 +9,14 @@ import org.mindrot.jbcrypt.BCrypt;
 
 public class AccountService implements Subscriber, Runnable {
 
-    private Address address;
     private MessageSystem messageSystem;
     private UserDAO userDAO;
 
     public AccountService(MessageSystem messageSystem) {
         userDAO = new UserDAO(new SQLConnector());
         this.messageSystem = messageSystem;
-        this.address = new Address();
         messageSystem.addService(this);
-        //messageSystem.getAddressService().setAccountService(address);
-        messageSystem.addAddressService(AccountService.class, address);
     }
-
 
     public long getUserID(String username, String password) {
         if (username == null || password == null || username.isEmpty() || password.isEmpty()) {
@@ -49,8 +43,8 @@ public class AccountService implements Subscriber, Runnable {
         }
     }
 
-    public Address getAddress() {
-        return address;
+    public Class getAddress() {
+        return AccountService.class;
     }
 
     public MessageSystem getMessageSystem(){

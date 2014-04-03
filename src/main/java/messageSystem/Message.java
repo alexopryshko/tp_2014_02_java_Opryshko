@@ -2,19 +2,19 @@ package messageSystem;
 
 
 public abstract class Message {
-    private Address from;
-    private Address to;
+    private Class from;
+    private Class to;
 
-    public Message(Address from, Address to){
+    public Message(Class from, Class to){
         this.from = from;
         this.to = to;
     }
 
-    protected Address getFrom(){
+    protected Class getFrom(){
         return from;
     }
 
-    protected Address getTo(){
+    protected Class getTo(){
         return to;
     }
 

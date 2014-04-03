@@ -5,7 +5,7 @@ public class MsgRegistrationStatus extends MessageToFrontend {
     private String sessionID;
     private Integer status;
 
-    public MsgRegistrationStatus(Address from, Address to, String sessionID, Integer status) {
+    public MsgRegistrationStatus(Class from, Class to, String sessionID, Integer status) {
         super(from, to);
         this.status = status;
         this.sessionID = sessionID;

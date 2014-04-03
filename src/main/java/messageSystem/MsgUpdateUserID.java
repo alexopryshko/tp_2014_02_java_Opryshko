@@ -5,7 +5,7 @@ public class MsgUpdateUserID extends MessageToFrontend {
     private String sessionId;
     private Long id;
 
-    public MsgUpdateUserID(Address from, Address to, String sessionId, Long id) {
+    public MsgUpdateUserID(Class from, Class to, String sessionId, Long id) {
         super(from, to);
         this.sessionId = sessionId;
         this.id = id;

@@ -21,16 +21,13 @@ public class Frontend extends HttpServlet implements Subscriber, Runnable {
     private static DateFormat formatter = new SimpleDateFormat("HH.mm.ss");
 
     private MessageSystem messageSystem;
-    private Address address;
 
     private Map<String, UserSession> users = new ConcurrentHashMap<>();
     private Map<String, UserSession> usersToRegistration = new ConcurrentHashMap<>();
 
     public Frontend(MessageSystem messageSystem){
-        address = new Address();
         this.messageSystem = messageSystem;
         messageSystem.addService(this);
-        messageSystem.addAddressService(Frontend.class, address);
     }
 
     public static String getTime() {
@@ -106,12 +103,7 @@ public class Frontend extends HttpServlet implements Subscriber, Runnable {
             case "/login":
                 UserSession userSession = new UserSession(sessionId, login);
                 users.put(sessionId, userSession);
-                Address frontendAddress = getAddress();
-
-                //Address accountServiceAddress = messageSystem.getAddressService().getAccountService();
-                Address accountServiceAddress = messageSystem.getAddressService(AccountService.class);
-
-                messageSystem.sendMessage(new MsgGetUserID(frontendAddress, accountServiceAddress, login, password, sessionId));
+                messageSystem.sendMessage(new MsgGetUserID(Frontend.class, AccountService.class, login, password, sessionId));
                 response.setContentType("text/html;charset=utf-8");
                 response.setStatus(HttpServletResponse.SC_OK);
                 response.sendRedirect("/");
@@ -119,12 +111,7 @@ public class Frontend extends HttpServlet implements Subscriber, Runnable {
             case "/registration":
                 userSession = new UserSession(sessionId, login);
                 usersToRegistration.put(sessionId, userSession);
-                frontendAddress = getAddress();
-
-                //accountServiceAddress = messageSystem.getAddressService().getAccountService();
-                accountServiceAddress = messageSystem.getAddressService(AccountService.class);
-
-                messageSystem.sendMessage(new MsgAddNewUser(frontendAddress, accountServiceAddress, login, password, sessionId));
+                messageSystem.sendMessage(new MsgAddNewUser(Frontend.class, AccountService.class, login, password, sessionId));
                 response.setContentType("text/html;charset=utf-8");
                 response.setStatus(HttpServletResponse.SC_OK);
                 response.sendRedirect("/registration");
@@ -181,8 +168,8 @@ public class Frontend extends HttpServlet implements Subscriber, Runnable {
         response.getWriter().println(PageGenerator.getPage("404.tml", new HashMap<String, Object>()));
     }
 
-    public Address getAddress() {
-        return address;
+    public Class getAddress() {
+        return Frontend.class;
     }
 
     public void run() {

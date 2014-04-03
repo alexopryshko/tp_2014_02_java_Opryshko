@@ -6,7 +6,7 @@ public class MsgGetUserID extends MessageToAccountService {
     private String password;
     private String sessionId;
 
-    public MsgGetUserID(Address from, Address to, String name, String password, String sessionId) {
+    public MsgGetUserID(Class from, Class to, String name, String password, String sessionId) {
         super(from, to);
         this.username= name;
         this.password = password;
