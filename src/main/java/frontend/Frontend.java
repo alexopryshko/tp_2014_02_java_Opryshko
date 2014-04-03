@@ -1,5 +1,6 @@
 package frontend;
 
+import account.AccountService;
 import account.UserSession;
 import helper.TimeHelper;
 import messageSystem.*;
@@ -29,6 +30,7 @@ public class Frontend extends HttpServlet implements Subscriber, Runnable {
         address = new Address();
         this.messageSystem = messageSystem;
         messageSystem.addService(this);
+        messageSystem.addAddressService(Frontend.class, address);
     }
 
     public static String getTime() {
@@ -105,7 +107,10 @@ public class Frontend extends HttpServlet implements Subscriber, Runnable {
                 UserSession userSession = new UserSession(sessionId, login);
                 users.put(sessionId, userSession);
                 Address frontendAddress = getAddress();
-                Address accountServiceAddress = messageSystem.getAddressService().getAccountService();
+
+                //Address accountServiceAddress = messageSystem.getAddressService().getAccountService();
+                Address accountServiceAddress = messageSystem.getAddressService(AccountService.class);
+
                 messageSystem.sendMessage(new MsgGetUserID(frontendAddress, accountServiceAddress, login, password, sessionId));
                 response.setContentType("text/html;charset=utf-8");
                 response.setStatus(HttpServletResponse.SC_OK);
@@ -115,7 +120,10 @@ public class Frontend extends HttpServlet implements Subscriber, Runnable {
                 userSession = new UserSession(sessionId, login);
                 usersToRegistration.put(sessionId, userSession);
                 frontendAddress = getAddress();
-                accountServiceAddress = messageSystem.getAddressService().getAccountService();
+
+                //accountServiceAddress = messageSystem.getAddressService().getAccountService();
+                accountServiceAddress = messageSystem.getAddressService(AccountService.class);
+
                 messageSystem.sendMessage(new MsgAddNewUser(frontendAddress, accountServiceAddress, login, password, sessionId));
                 response.setContentType("text/html;charset=utf-8");
                 response.setStatus(HttpServletResponse.SC_OK);

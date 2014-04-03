@@ -19,7 +19,8 @@ public class AccountService implements Subscriber, Runnable {
         this.messageSystem = messageSystem;
         this.address = new Address();
         messageSystem.addService(this);
-        messageSystem.getAddressService().setAccountService(address);
+        //messageSystem.getAddressService().setAccountService(address);
+        messageSystem.addAddressService(AccountService.class, address);
     }
 
 
