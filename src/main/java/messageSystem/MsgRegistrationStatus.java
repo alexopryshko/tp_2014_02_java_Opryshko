@@ -2,6 +2,7 @@ package messageSystem;
 import frontend.Frontend;
 
 public class MsgRegistrationStatus extends MessageToFrontend {
+
     private String sessionID;
     private Integer status;
 

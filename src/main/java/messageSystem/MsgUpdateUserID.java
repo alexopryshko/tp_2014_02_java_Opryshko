@@ -2,6 +2,7 @@ package messageSystem;
 import frontend.Frontend;
 
 public class MsgUpdateUserID extends MessageToFrontend {
+
     private String sessionId;
     private Long id;
 

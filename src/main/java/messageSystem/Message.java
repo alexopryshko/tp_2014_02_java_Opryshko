@@ -2,6 +2,7 @@ package messageSystem;
 
 
 public abstract class Message {
+
     private Address from;
     private Address to;
 

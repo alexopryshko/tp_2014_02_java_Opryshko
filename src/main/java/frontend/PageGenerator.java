@@ -11,6 +11,7 @@ import java.io.Writer;
 import java.util.Map;
 
 public class PageGenerator {
+
     private static final String HTML_DIR = "tml";
     private static final Configuration CFG = new Configuration();
 

@@ -2,6 +2,7 @@ package messageSystem;
 import account.AccountService;
 
 public class MsgGetUserID extends MessageToAccountService {
+
     private String username;
     private String password;
     private String sessionId;
