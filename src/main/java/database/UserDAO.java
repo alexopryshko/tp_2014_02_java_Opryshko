@@ -1,5 +1,4 @@
 package database;
-import helper.TimeHelper;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.*;
@@ -21,7 +20,6 @@ public class UserDAO {
     }
 
     public boolean isRegistered (String username, String password) {
-        TimeHelper.sleep(2000);
         Executor executor = new Executor();
         String password_db = null;
         try {
@@ -47,7 +45,6 @@ public class UserDAO {
     }
 
     public Integer getID(String username) {
-        TimeHelper.sleep(2000);
         Executor executor = new Executor();
         Integer id = 0;
         try {

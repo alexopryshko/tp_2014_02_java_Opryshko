@@ -19,6 +19,7 @@ public class AccountService implements Subscriber, Runnable {
     }
 
     public long getUserID(String username, String password) {
+        TimeHelper.sleep(2000);
         if (username == null || password == null || username.isEmpty() || password.isEmpty()) {
             return 0;
         }

@@ -96,7 +96,6 @@ public class Frontend extends HttpServlet implements Subscriber, Runnable {
         String login = request.getParameter("login");
         String password = request.getParameter("password");
         String sessionId = request.getSession().getId();
-
         String path = request.getPathInfo();
 
         switch (path) {
