@@ -1,14 +1,18 @@
 package messageSystem;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class AddressService {
 
-    private Address accountService;
+    private Map<Customers, Address> addressService = new HashMap<>();
 
-    public Address getAccountService() {
-        return accountService;
+    public void addCustomers(Customers customers, Address address) {
+        addressService.put(customers, address);
     }
 
-    public void setAccountService(Address accountService) {
-        this.accountService = accountService;
+    public Address getAddressCustomers(Customers customers) {
+        return addressService.get(customers);
     }
+
 }

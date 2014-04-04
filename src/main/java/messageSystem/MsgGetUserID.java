@@ -14,6 +14,7 @@ public class MsgGetUserID extends MessageToAccountService {
         this.sessionId = sessionId;
     }
 
+    @Override
     void exec(AccountService accountService) {
         Long id = accountService.getUserID(username, password);
         accountService.getMessageSystem().sendMessage(new MsgUpdateUserID(getTo(), getFrom(), sessionId, id));

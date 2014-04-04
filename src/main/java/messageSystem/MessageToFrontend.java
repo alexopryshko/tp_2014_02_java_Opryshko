@@ -7,6 +7,7 @@ public abstract class MessageToFrontend extends Message{
         super(from, to);
     }
 
+    @Override
     public void exec(Subscriber subscriber) {
         if(subscriber instanceof Frontend){
             exec((Frontend)subscriber);

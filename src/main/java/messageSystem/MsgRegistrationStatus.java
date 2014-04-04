@@ -12,6 +12,7 @@ public class MsgRegistrationStatus extends MessageToFrontend {
         this.sessionID = sessionID;
     }
 
+    @Override
     void exec(Frontend frontend) {
         frontend.setRegistrationStatus(sessionID, status);
     }

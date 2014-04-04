@@ -14,6 +14,7 @@ public class MsgAddNewUser extends MessageToAccountService{
         this.sessionId = sessionId;
     }
 
+    @Override
     void exec(AccountService accountService) {
         boolean result = accountService.userRegistration(username, password);
         accountService.getMessageSystem().sendMessage(new MsgRegistrationStatus(getTo(), getFrom(), sessionId, (result) ? 1 : 0));

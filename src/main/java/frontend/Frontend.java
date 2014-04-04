@@ -105,7 +105,7 @@ public class Frontend extends HttpServlet implements Subscriber, Runnable {
                 UserSession userSession = new UserSession(sessionId, login);
                 users.put(sessionId, userSession);
                 Address frontendAddress = getAddress();
-                Address accountServiceAddress = messageSystem.getAddressService().getAccountService();
+                Address accountServiceAddress = messageSystem.getAddressService().getAddressCustomers(Customers.ACCOUNTSERVICE);
                 messageSystem.sendMessage(new MsgGetUserID(frontendAddress, accountServiceAddress, login, password, sessionId));
                 response.setContentType("text/html;charset=utf-8");
                 response.setStatus(HttpServletResponse.SC_OK);
@@ -115,7 +115,7 @@ public class Frontend extends HttpServlet implements Subscriber, Runnable {
                 userSession = new UserSession(sessionId, login);
                 usersToRegistration.put(sessionId, userSession);
                 frontendAddress = getAddress();
-                accountServiceAddress = messageSystem.getAddressService().getAccountService();
+                accountServiceAddress = messageSystem.getAddressService().getAddressCustomers(Customers.ACCOUNTSERVICE);
                 messageSystem.sendMessage(new MsgAddNewUser(frontendAddress, accountServiceAddress, login, password, sessionId));
                 response.setContentType("text/html;charset=utf-8");
                 response.setStatus(HttpServletResponse.SC_OK);
@@ -173,10 +173,17 @@ public class Frontend extends HttpServlet implements Subscriber, Runnable {
         response.getWriter().println(PageGenerator.getPage("404.tml", new HashMap<String, Object>()));
     }
 
+    @Override
     public Address getAddress() {
         return address;
     }
 
+    @Override
+    public Customers getCustomers() {
+        return Customers.FRONTEND;
+    }
+
+    @Override
     public void run() {
         while (true) {
             messageSystem.execForSubscriber(this);

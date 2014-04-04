@@ -12,6 +12,7 @@ public class MessageSystem {
 
     public void addService(Subscriber subscriber){
         messages.put(subscriber.getAddress(), new ConcurrentLinkedQueue<Message>());
+        addressService.addCustomers(subscriber.getCustomers(), subscriber.getAddress());
     }
 
     public void sendMessage(Message message){

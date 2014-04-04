@@ -18,6 +18,7 @@ public class SQLConnector implements Connector {
         password = "password=pwd";
     }
 
+    @Override
     public String getConnectionString() {
         return type + host + port + name + login + password;
     }

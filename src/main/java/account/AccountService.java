@@ -3,6 +3,7 @@ import database.SQLConnector;
 import database.UserDAO;
 import helper.TimeHelper;
 import messageSystem.Address;
+import messageSystem.Customers;
 import messageSystem.MessageSystem;
 import messageSystem.Subscriber;
 import org.mindrot.jbcrypt.BCrypt;
@@ -19,11 +20,11 @@ public class AccountService implements Subscriber, Runnable {
         this.messageSystem = messageSystem;
         this.address = new Address();
         messageSystem.addService(this);
-        messageSystem.getAddressService().setAccountService(address);
     }
 
 
     public long getUserID(String username, String password) {
+        TimeHelper.sleep(2000);
         if (username == null || password == null || username.isEmpty() || password.isEmpty()) {
             return 0;
         }
@@ -41,6 +42,11 @@ public class AccountService implements Subscriber, Runnable {
         return userDAO.addNewUser(login, hashed);
     }
 
+    public MessageSystem getMessageSystem(){
+        return messageSystem;
+    }
+
+    @Override
     public void run(){
         while(true){
             messageSystem.execForSubscriber(this);
@@ -48,11 +54,15 @@ public class AccountService implements Subscriber, Runnable {
         }
     }
 
+    @Override
     public Address getAddress() {
         return address;
     }
 
-    public MessageSystem getMessageSystem(){
-        return messageSystem;
+    @Override
+    public Customers getCustomers() {
+        return Customers.ACCOUNTSERVICE;
     }
+
+
 }

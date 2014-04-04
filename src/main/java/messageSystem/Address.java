@@ -12,7 +12,16 @@ public class Address {
         this.subscriberID = subscriberIdCreator.incrementAndGet();
     }
 
-    public int hashCode(){
+    @Override
+    public int hashCode() {
         return subscriberID;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (getClass() != object.getClass())
+            return false;
+        Address address = (Address) object;
+        return this.hashCode() == address.hashCode();
     }
 }
