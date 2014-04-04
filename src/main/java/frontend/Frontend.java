@@ -102,6 +102,10 @@ public class Frontend extends HttpServlet implements Subscriber, Runnable {
 
         switch (path) {
             case "/login":
+                if (login == null || password == null || login.isEmpty() || password.isEmpty()) {
+                    response.sendRedirect("/");
+                    return;
+                }
                 UserSession userSession = new UserSession(sessionId, login);
                 users.put(sessionId, userSession);
                 Address frontendAddress = getAddress();
@@ -112,6 +116,10 @@ public class Frontend extends HttpServlet implements Subscriber, Runnable {
                 response.sendRedirect("/");
                 break;
             case "/registration":
+                if (login == null || password == null || login.isEmpty() || password.isEmpty()) {
+                    response.sendRedirect("/registration");
+                    return;
+                }
                 userSession = new UserSession(sessionId, login);
                 usersToRegistration.put(sessionId, userSession);
                 frontendAddress = getAddress();
