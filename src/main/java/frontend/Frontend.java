@@ -195,7 +195,7 @@ public class Frontend extends HttpServlet implements Subscriber, Runnable {
     public void run() {
         while (true) {
             messageSystem.execForSubscriber(this);
-            TimeHelper.sleep(100);
+            TimeHelper.sleep(10);
         }
     }
 }

@@ -5,7 +5,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Address {
 
     static private AtomicInteger subscriberIdCreator = new AtomicInteger();
-
     final private int subscriberID;
 
     public Address(){
@@ -19,9 +18,13 @@ public class Address {
 
     @Override
     public boolean equals(Object object) {
+        if (this == object)
+            return true;
+        if (object == null)
+            return false;
         if (getClass() != object.getClass())
             return false;
-        Address address = (Address) object;
-        return this.hashCode() == address.hashCode();
+        Address other = (Address) object;
+        return subscriberID == other.subscriberID;
     }
 }
