@@ -11,7 +11,7 @@ public class UserSession {
     public UserSession(String sessionId, String name) {
         this.sessionId = sessionId;
         this.name = name;
-        this.registrationStatus = -1;
+        this.registrationStatus = -1; //сделать статус через enum
     }
 
     public String getName() {

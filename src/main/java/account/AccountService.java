@@ -13,7 +13,7 @@ public class AccountService implements Subscriber, Runnable {
 
     private Address address;
     private MessageSystem messageSystem;
-    private UserDAO userDAO;
+    private UserDAO userDAO; //только connection, а DAO создавать каждый раз
 
     public AccountService(MessageSystem messageSystem) {
         userDAO = new UserDAO(new SQLConnector());
@@ -24,7 +24,10 @@ public class AccountService implements Subscriber, Runnable {
 
 
     public long getUserID(String username, String password) {
-        //TimeHelper.sleep(2000);
+        Integer temp = address.hashCode();
+        System.out.append(temp.toString());
+
+        TimeHelper.sleep(2000);
         if (userDAO.isRegistered(username, password)) {
             return userDAO.getID(username);
         }
@@ -34,7 +37,10 @@ public class AccountService implements Subscriber, Runnable {
     }
 
     public boolean userRegistration(String login, String password) {
-        //TimeHelper.sleep(2000);
+        Integer temp = address.hashCode();
+        System.out.append(temp.toString());
+
+        TimeHelper.sleep(2000);
         String hashed = BCrypt.hashpw(password, BCrypt.gensalt(12));
         return userDAO.addNewUser(login, hashed);
     }

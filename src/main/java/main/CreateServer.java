@@ -18,9 +18,11 @@ public class CreateServer {
 
         Frontend frontend = new Frontend(ms);
         AccountService accountService = new AccountService(ms);
+        AccountService accountService1 = new AccountService(ms);
 
         (new Thread(frontend)).start();
         (new Thread(accountService)).start();
+        (new Thread(accountService1)).start();
 
         Server server = new Server(PORT);
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
