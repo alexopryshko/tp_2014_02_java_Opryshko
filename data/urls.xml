@@ -1,0 +1,7 @@
+<class type = 'resourcesSystem.resources.URLs'>
+    <MAIN>/</MAIN>
+    <TIME>/time</TIME>
+    <REGISTRATION>/registration</REGISTRATION>
+    <LOGIN>/login</LOGIN>
+    <ERROR>/error</ERROR>
+</class>

@@ -4,6 +4,8 @@ import account.RegistrationStatus;
 import account.UserSession;
 import helper.TimeHelper;
 import messageSystem.*;
+import resourcesSystem.ResourceFactory;
+import resourcesSystem.resources.URLs;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -42,98 +44,96 @@ public class Frontend extends HttpServlet implements Subscriber, Runnable {
         response.setContentType("text/html;charset=utf-8");
         response.setStatus(HttpServletResponse.SC_OK);
 
+        URLs urls = (URLs) ResourceFactory.instance().getResource("data/urls.xml");
         String path = request.getPathInfo();
         HttpSession session = request.getSession();
         UserSession userSession = users.get(session.getId());
         UserSession registrationUser = usersToRegistration.get(session.getId());
 
         if (userSession == null) {
-            switch (path) {
-                case "/":
-                    renderPage("index.tml", response, null);
-                    break;
-                case "/time":
-                    response.sendRedirect("/");
-                    break;
-                case "/registration":
-                    if (registrationUser == null) {
-                        renderPage("registration.tml", response, null);
-                        return;
-                    }
-                    if (registrationUser.getRegistrationStatus() == RegistrationStatus.NOT_REGISTRATED) {
-                        renderPage("info.tml", response, "Wait for registration");
-                        return;
-                    }
-                    if (registrationUser.getRegistrationStatus() == RegistrationStatus.USER_ALREADY_EXIST) {
-                        renderPage("registration.tml", response, "Error");
-                        return;
-                    }
-                    if (registrationUser.getRegistrationStatus() == RegistrationStatus.SUCCESS) {
-                        usersToRegistration.remove(registrationUser.getSessionId());
-                        response.sendRedirect("/");
-                        return;
-                    }
-                    break;
-                default:
-                    renderErrorPage(response);
-                    break;
+            if (path.equals(urls.getMAIN())) {
+                renderPage("index.tml", response, null);
             }
-            return;
+            else if (path.equals(urls.getTIME())) {
+                response.sendRedirect(urls.getMAIN());
+            }
+            else if (path.equals(urls.getREGISTRATION())) {
+                if (registrationUser == null) {
+                    renderPage("registration.tml", response, null);
+                    return;
+                }
+                if (registrationUser.getRegistrationStatus() == RegistrationStatus.NOT_REGISTRATED) {
+                    renderPage("info.tml", response, "Wait for registration");
+                    return;
+                }
+                if (registrationUser.getRegistrationStatus() == RegistrationStatus.USER_ALREADY_EXIST) {
+                    renderPage("registration.tml", response, "Error");
+                    return;
+                }
+                if (registrationUser.getRegistrationStatus() == RegistrationStatus.SUCCESS) {
+                    usersToRegistration.remove(registrationUser.getSessionId());
+                    response.sendRedirect("/");
+                }
+            }
+            else
+                renderErrorPage(response);
         }
-        if (userSession.getUserId() == null) {
-            renderPage("info.tml", response, "Wait for authorization");
-            return;
+        else {
+            if (userSession.getUserId() == null) {
+                renderPage("info.tml", response, "Wait for authorization");
+                return;
+            }
+
+            if (userSession.getUserId() == 0) {
+                renderPage("index.tml", response, "Error");
+                users.remove(userSession.getSessionId());
+                return;
+            }
+
+            renderGamePage(response, userSession);
         }
-        if (userSession.getUserId() == 0) {
-            renderPage("index.tml", response, "Error");
-            users.remove(userSession.getSessionId());
-            return;
-        }
-        renderGamePage(response, userSession);
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        URLs urls = (URLs) ResourceFactory.instance().getResource("data/urls.xml");
         String login = request.getParameter("login");
         String password = request.getParameter("password");
         String sessionId = request.getSession().getId();
-
         String path = request.getPathInfo();
 
-        switch (path) {
-            case "/login":
-                if (login == null || password == null || login.isEmpty() || password.isEmpty()) {
-                    response.sendRedirect("/");
-                    return;
-                }
-                UserSession userSession = new UserSession(sessionId, login);
-                users.put(sessionId, userSession);
-                Address frontendAddress = getAddress();
-                Address accountServiceAddress = messageSystem.getAddressService().getAddressCustomers(Customers.ACCOUNTSERVICE);
-                messageSystem.sendMessage(new MsgGetUserID(frontendAddress, accountServiceAddress, login, password, sessionId));
-                response.setContentType("text/html;charset=utf-8");
-                response.setStatus(HttpServletResponse.SC_OK);
+        if (path.equals(urls.getLOGIN())) {
+            if (login == null || password == null || login.isEmpty() || password.isEmpty()) {
                 response.sendRedirect("/");
-                break;
-            case "/registration":
-                if (login == null || password == null || login.isEmpty() || password.isEmpty()) {
-                    response.sendRedirect("/registration");
-                    return;
-                }
-                userSession = new UserSession(sessionId, login);
-                usersToRegistration.put(sessionId, userSession);
-                frontendAddress = getAddress();
-                accountServiceAddress = messageSystem.getAddressService().getAddressCustomers(Customers.ACCOUNTSERVICE);
-                messageSystem.sendMessage(new MsgAddNewUser(frontendAddress, accountServiceAddress, login, password, sessionId));
-                response.setContentType("text/html;charset=utf-8");
-                response.setStatus(HttpServletResponse.SC_OK);
-                response.sendRedirect("/registration");
-                break;
-            default:
-                response.sendRedirect("/error");
-                break;
+                return;
+            }
+            UserSession userSession = new UserSession(sessionId, login);
+            users.put(sessionId, userSession);
+            Address frontendAddress = getAddress();
+            Address accountServiceAddress = messageSystem.getAddressService().getAddressCustomers(Customers.ACCOUNTSERVICE);
+            messageSystem.sendMessage(new MsgGetUserID(frontendAddress, accountServiceAddress, login, password, sessionId));
+            response.setContentType("text/html;charset=utf-8");
+            response.setStatus(HttpServletResponse.SC_OK);
+            response.sendRedirect(urls.getMAIN());
         }
+        else if (path.equals(urls.getREGISTRATION())) {
+            if (login == null || password == null || login.isEmpty() || password.isEmpty()) {
+                response.sendRedirect("/registration");
+                return;
+            }
+            UserSession userSession = new UserSession(sessionId, login);
+            usersToRegistration.put(sessionId, userSession);
+            Address frontendAddress = getAddress();
+            Address accountServiceAddress = messageSystem.getAddressService().getAddressCustomers(Customers.ACCOUNTSERVICE);
+            messageSystem.sendMessage(new MsgAddNewUser(frontendAddress, accountServiceAddress, login, password, sessionId));
+            response.setContentType("text/html;charset=utf-8");
+            response.setStatus(HttpServletResponse.SC_OK);
+            response.sendRedirect("/registration");
+        }
+        else
+            response.sendRedirect(urls.getERROR());
+
     }
 
 
