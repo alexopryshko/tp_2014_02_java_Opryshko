@@ -1,0 +1,5 @@
+<class type = 'resourcesSystem.resources.SQLQueries'>
+    <selectUserByUsername>SELECT password FROM users WHERE username='%s';</selectUserByUsername>
+    <selectIDByUsername>SELECT id FROM users WHERE username='%s';</selectIDByUsername>
+    <insertUser>INSERT INTO users (username, password,registration) VALUES ('%s','%s', NOW());</insertUser>
+</class>

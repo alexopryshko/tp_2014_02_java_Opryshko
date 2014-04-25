@@ -1,7 +1,11 @@
 package database;
 import org.mindrot.jbcrypt.BCrypt;
+import resourcesSystem.ResourceFactory;
+import resourcesSystem.resources.SQLQueries;
 
 import java.sql.*;
+
+import static java.lang.String.format;
 
 public class UserDAO {
 
@@ -9,9 +13,10 @@ public class UserDAO {
         Executor executor = new Executor();
         String password_db = null;
         try {
+            SQLQueries query = (SQLQueries) ResourceFactory.instance().getResource("data/sqlQueries.xml");
             password_db = executor.execQuery(
                     connection,
-                    "SELECT password FROM users WHERE username='" + username +  "';",
+                    format(query.getSelectUserByUsername(), username),
                     new ResultHandler<String>()
                     {
                         public String handle(ResultSet result) throws SQLException {
@@ -34,9 +39,10 @@ public class UserDAO {
         Executor executor = new Executor();
         Integer id = 0;
         try {
+            SQLQueries query = (SQLQueries) ResourceFactory.instance().getResource("data/sqlQueries.xml");
             id = executor.execQuery(
                     connection,
-                    "SELECT id FROM users WHERE username='" + username + "';",
+                    format(query.getSelectIDByUsername(), username),
                     new ResultHandler<Integer>()
                     {
                         public Integer handle(ResultSet result) throws SQLException {
@@ -59,9 +65,8 @@ public class UserDAO {
         Executor executor = new Executor();
         Boolean temp = true;
         try {
-            executor.execUpdate(connection, "INSERT INTO users (username, password,registration) VALUES ('" +
-                    username + "','" +
-                    hashed + "', NOW());");
+            SQLQueries query = (SQLQueries) ResourceFactory.instance().getResource("data/sqlQueries.xml");
+            executor.execUpdate(connection, format(query.getInsertUser(), username, hashed));
         }
         catch (SQLException e) {
             temp = false;
