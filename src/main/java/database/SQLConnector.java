@@ -1,6 +1,8 @@
 package database;
 
-public class SQLConnector implements Connector {
+import java.sql.*;
+
+public class SQLConnector {
     private String type;
     private String host;
     private String port;
@@ -17,8 +19,18 @@ public class SQLConnector implements Connector {
         this.password = "password=" + pwd;
     }
 
-    @Override
-    public String getConnectionString() {
-        return type + host + port + name + login + password;
+    public Connection create() {
+        try{
+            DriverManager.registerDriver((Driver) Class.forName("com.mysql.jdbc.Driver").newInstance());
+            return DriverManager.getConnection(type + host + port + name + login + password);
+
+        } catch (SQLException |
+                InstantiationException |
+                IllegalAccessException |
+                ClassNotFoundException e) {
+            return  null;
+        }
     }
+
+
 }

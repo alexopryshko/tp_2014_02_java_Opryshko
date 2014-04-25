@@ -4,22 +4,8 @@ import org.mindrot.jbcrypt.BCrypt;
 import java.sql.*;
 
 public class UserDAO {
-    private Connection connection;
 
-    public UserDAO(Connector connector) {
-        try{
-            DriverManager.registerDriver((Driver) Class.forName("com.mysql.jdbc.Driver").newInstance());
-            connection = DriverManager.getConnection(connector.getConnectionString());
-
-        } catch (SQLException |
-                InstantiationException |
-                IllegalAccessException |
-                ClassNotFoundException e) {
-            connection = null;
-        }
-    }
-
-    public boolean isRegistered (String username, String password) {
+    public static boolean isRegistered (Connection connection, String username, String password) {
         Executor executor = new Executor();
         String password_db = null;
         try {
@@ -44,7 +30,7 @@ public class UserDAO {
         return password_db != null && BCrypt.checkpw(password, password_db);
     }
 
-    public Integer getID(String username) {
+    public static Integer getID(Connection connection, String username) {
         Executor executor = new Executor();
         Integer id = 0;
         try {
@@ -69,7 +55,7 @@ public class UserDAO {
         return id;
     }
 
-    public boolean addNewUser(String username, String hashed) {
+    public static boolean addNewUser(Connection connection, String username, String hashed) {
         Executor executor = new Executor();
         Boolean temp = true;
         try {
@@ -82,16 +68,5 @@ public class UserDAO {
         }
         return temp;
     }
-
-    public boolean closeConnection() {
-        try {
-            connection.close();
-            return true;
-        }
-        catch (SQLException e) {
-            return false;
-        }
-    }
-
 
 }

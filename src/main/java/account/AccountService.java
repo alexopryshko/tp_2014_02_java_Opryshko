@@ -7,26 +7,26 @@ import messageSystem.Customers;
 import messageSystem.MessageSystem;
 import messageSystem.Subscriber;
 import org.mindrot.jbcrypt.BCrypt;
-import resourcesSystem.Resource;
 import resourcesSystem.ResourceFactory;
 import resourcesSystem.resources.DatabaseConf;
+
+import java.sql.Connection;
 
 
 public class AccountService implements Subscriber, Runnable {
 
     private Address address;
     private MessageSystem messageSystem;
-    private UserDAO userDAO; //только connection, а DAO создавать каждый раз
+    private Connection connection;
 
     public AccountService(MessageSystem messageSystem) {
         DatabaseConf databaseConf = (DatabaseConf) ResourceFactory.instance().getResource("data/databaseConf.xml");
-        userDAO = new UserDAO(new SQLConnector(
+        connection = new SQLConnector(
                 databaseConf.getHost(),
                 databaseConf.getPort(),
                 databaseConf.getName(),
                 databaseConf.getLogin(),
-                databaseConf.getPassword()
-        ));
+                databaseConf.getPassword()).create();
         this.messageSystem = messageSystem;
         this.address = new Address();
         messageSystem.addService(this);
@@ -38,8 +38,8 @@ public class AccountService implements Subscriber, Runnable {
         System.out.append(temp.toString());
 
         TimeHelper.sleep(2000);
-        if (userDAO.isRegistered(username, password)) {
-            return userDAO.getID(username);
+        if (UserDAO.isRegistered(connection, username, password)) {
+            return UserDAO.getID(connection, username);
         }
         else {
             return 0;
@@ -52,7 +52,7 @@ public class AccountService implements Subscriber, Runnable {
 
         TimeHelper.sleep(2000);
         String hashed = BCrypt.hashpw(password, BCrypt.gensalt(12));
-        return userDAO.addNewUser(login, hashed);
+        return UserDAO.addNewUser(connection, login, hashed);
     }
 
     public MessageSystem getMessageSystem(){
