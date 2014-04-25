@@ -1,6 +1,5 @@
 package accountService;
 
-import account.UserSession;
 import database.SQLConnector;
 import database.UserDAO;
 import org.junit.After;
@@ -18,7 +17,7 @@ public class TestUserDAO {
 
     @Before
     public void setUp() {
-        userDAO = new UserDAO(new SQLConnector());
+        //userDAO = new UserDAO(new SQLConnector());
         correctData = "testName1";
         incorrectData = "IncorrectData";
     }

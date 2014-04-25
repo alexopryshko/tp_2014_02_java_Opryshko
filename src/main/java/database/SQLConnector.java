@@ -1,21 +1,20 @@
 package database;
 
-
 public class SQLConnector implements Connector {
-    private final String type;
-    private final String host;
-    private final String port;
-    private final String name;
-    private final String login;
-    private final String password;
+    private String type;
+    private String host;
+    private String port;
+    private String name;
+    private String login;
+    private String password;
 
-    public SQLConnector() {
-        type =     "jdbc:mysql://";
-        host =     "localhost:";
-        port =     "3306/";
-        name =     "game?";
-        login =    "user=AlexO&";
-        password = "password=pwd";
+    public SQLConnector(String host, Integer port, String name, String login, String pwd) {
+        this.type =     "jdbc:mysql://";
+        this.host =     host + ":";
+        this.port =     port.toString() + "/";
+        this.name =     name + "?";
+        this.login =    "user=" + login +"&";
+        this.password = "password=" + pwd;
     }
 
     @Override

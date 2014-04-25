@@ -1,0 +1,7 @@
+<class type = 'resourcesSystem.resources.DatabaseConf'>
+    <host>localhost</host>
+    <port>3306</port>
+    <name>game</name>
+    <login>AlexO</login>
+    <password>pwd</password>
+</class>

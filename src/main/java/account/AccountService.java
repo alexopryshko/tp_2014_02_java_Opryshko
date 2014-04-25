@@ -7,6 +7,9 @@ import messageSystem.Customers;
 import messageSystem.MessageSystem;
 import messageSystem.Subscriber;
 import org.mindrot.jbcrypt.BCrypt;
+import resourcesSystem.Resource;
+import resourcesSystem.ResourceFactory;
+import resourcesSystem.resources.DatabaseConf;
 
 
 public class AccountService implements Subscriber, Runnable {
@@ -16,7 +19,14 @@ public class AccountService implements Subscriber, Runnable {
     private UserDAO userDAO; //только connection, а DAO создавать каждый раз
 
     public AccountService(MessageSystem messageSystem) {
-        userDAO = new UserDAO(new SQLConnector());
+        DatabaseConf databaseConf = (DatabaseConf) ResourceFactory.instance().getResource("data/databaseConf.xml");
+        userDAO = new UserDAO(new SQLConnector(
+                databaseConf.getHost(),
+                databaseConf.getPort(),
+                databaseConf.getName(),
+                databaseConf.getLogin(),
+                databaseConf.getPassword()
+        ));
         this.messageSystem = messageSystem;
         this.address = new Address();
         messageSystem.addService(this);
