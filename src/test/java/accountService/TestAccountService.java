@@ -1,5 +1,7 @@
 package accountService;
 import account.AccountService;
+import main.ResourcesSystem;
+import messageSystem.MessageSystem;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,62 +12,34 @@ import java.util.Date;
 public class TestAccountService {
     private AccountService accountService = null;
     private String testString;
-    private int lengthString;
     private String correctString;
     private String passwd;
-/*
+
     @Before
     public void setUp() {
-        accountService = new AccountService();
+        ResourcesSystem.init("", "data/");
+        accountService = new AccountService("localhost", 3306, "game_db_test", "root", "");
+        int lengthString = 10;
         testString = generateString(lengthString);
         correctString = "admin";
         passwd = "admin";
-        lengthString = 10;
     }
 
     @Test
     public void testUserAuthenticationWithCorrectData() {
-        Assert.assertTrue(accountService.userAuthentication(correctString, passwd) != -1);
+        Assert.assertTrue(accountService.getUserID(correctString, passwd) != 0);
+    }
+
+    @Test
+    public void testUserAuthenticationWithIncorrectPwd() {
+        Assert.assertFalse(accountService.getUserID(correctString, testString) != 0);
     }
 
     @Test
     public void testUserAuthenticationWithIncorrectData() {
-        Assert.assertFalse(accountService.userAuthentication(testString, passwd) != -1);
+        Assert.assertFalse(accountService.getUserID(testString, testString) != 0);
     }
 
-    @Test
-    public void testIsAuthorizedWithAuthorizeUser() {
-        long id = accountService.userAuthentication(correctString, passwd);
-        Assert.assertTrue(accountService.isAuthorized(id));
-    }
-
-    @Test
-    public void testIsAuthorizedWithoutAuthorizeUser() {
-        Assert.assertFalse(accountService.isAuthorized((long) 0));
-    }
-
-    @Test
-    public void testGetAuthorizeUserByIDWithAuthorizeUser() {
-        long id = accountService.userAuthentication(correctString, passwd);
-        Assert.assertNotNull(accountService.getAuthorizeUserByID(id));
-    }
-
-    @Test
-    public void testGetAuthorizeUserByIDWithoutAuthorizeUser() {
-        Assert.assertNull(accountService.getAuthorizeUserByID((long) 0));
-    }
-
-    @Test
-    public void testDeAuthorizeUserByIDWithAuthorizeUser() {
-        long id = accountService.userAuthentication(correctString, passwd);
-        Assert.assertTrue(accountService.deAuthorizeUserByID(id));
-    }
-
-    @Test
-    public void testDeAuthorizeUserByIDWithoutAuthorizeUser() {
-        Assert.assertFalse(accountService.deAuthorizeUserByID((long) 0));
-    }
-*/
     @Test
     public void testUserRegistrationWithCorrectData() {
         Assert.assertTrue(accountService.userRegistration(testString + new Date(), testString));
@@ -73,7 +47,7 @@ public class TestAccountService {
 
     @Test
     public void testUserRegistrationWithIncorrectData() {
-        Assert.assertFalse(accountService.userRegistration(correctString, correctString));
+        Assert.assertFalse(accountService.userRegistration(correctString, passwd));
     }
 
 

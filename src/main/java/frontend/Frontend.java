@@ -28,6 +28,14 @@ public class Frontend extends HttpServlet implements Subscriber, Runnable {
     private Map<String, UserSession> users = new ConcurrentHashMap<>();
     private Map<String, UserSession> usersToRegistration = new ConcurrentHashMap<>();
 
+    public Frontend(MessageSystem messageSystem, Map<String, UserSession> users, Map<String, UserSession> usersToRegistration ) {
+        this.users = users;
+        this.usersToRegistration = usersToRegistration;
+        address = new Address();
+        this.messageSystem = messageSystem;
+        messageSystem.addService(this);
+    }
+
     public Frontend(MessageSystem messageSystem){
         address = new Address();
         this.messageSystem = messageSystem;
@@ -47,8 +55,21 @@ public class Frontend extends HttpServlet implements Subscriber, Runnable {
         URLs urls = (URLs) ResourceFactory.instance().getResource("data/urls.xml");
         String path = request.getPathInfo();
         HttpSession session = request.getSession();
-        UserSession userSession = users.get(session.getId());
-        UserSession registrationUser = usersToRegistration.get(session.getId());
+        UserSession userSession;
+        UserSession registrationUser;
+        try {
+            userSession = users.get(session.getId());
+        }
+        catch (NullPointerException e) {
+            userSession = null;
+        }
+        try {
+            registrationUser = usersToRegistration.get(session.getId());
+        }
+        catch (NullPointerException e) {
+            registrationUser = null;
+        }
+
 
         if (userSession == null) {
             if (path.equals(urls.getMAIN())) {
@@ -119,7 +140,7 @@ public class Frontend extends HttpServlet implements Subscriber, Runnable {
         }
         else if (path.equals(urls.getREGISTRATION())) {
             if (login == null || password == null || login.isEmpty() || password.isEmpty()) {
-                response.sendRedirect("/registration");
+                response.sendRedirect(urls.getREGISTRATION());
                 return;
             }
             UserSession userSession = new UserSession(sessionId, login);
@@ -129,7 +150,7 @@ public class Frontend extends HttpServlet implements Subscriber, Runnable {
             messageSystem.sendMessage(new MsgAddNewUser(frontendAddress, accountServiceAddress, login, password, sessionId));
             response.setContentType("text/html;charset=utf-8");
             response.setStatus(HttpServletResponse.SC_OK);
-            response.sendRedirect("/registration");
+            response.sendRedirect(urls.getREGISTRATION());
         }
         else
             response.sendRedirect(urls.getERROR());

@@ -19,6 +19,13 @@ public class AccountService implements Subscriber, Runnable {
     private MessageSystem messageSystem;
     private Connection connection;
 
+    public AccountService(String host, Integer port, String name, String login, String pwd) {
+        connection = new SQLConnector(host, port, name, login, pwd).create();
+        this.messageSystem = new MessageSystem();
+        this.address = new Address();
+        messageSystem.addService(this);
+    }
+
     public AccountService(MessageSystem messageSystem) {
         DatabaseConf databaseConf = (DatabaseConf) ResourceFactory.instance().getResource("data/databaseConf.xml");
         connection = new SQLConnector(
@@ -36,8 +43,6 @@ public class AccountService implements Subscriber, Runnable {
     public long getUserID(String username, String password) {
         Integer temp = address.hashCode();
         System.out.append(temp.toString());
-
-        TimeHelper.sleep(2000);
         if (UserDAO.isRegistered(connection, username, password)) {
             return UserDAO.getID(connection, username);
         }
@@ -49,8 +54,6 @@ public class AccountService implements Subscriber, Runnable {
     public boolean userRegistration(String login, String password) {
         Integer temp = address.hashCode();
         System.out.append(temp.toString());
-
-        TimeHelper.sleep(2000);
         String hashed = BCrypt.hashpw(password, BCrypt.gensalt(12));
         return UserDAO.addNewUser(connection, login, hashed);
     }

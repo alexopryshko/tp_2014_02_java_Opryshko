@@ -12,6 +12,7 @@
         <label for="InputEmail1"><h1>Registration</h1></label>
 
         <#if error??>
+            <div id="userExist"></div>
             <div class="alert alert-danger">Same user already exist</div>
         </#if>
 

@@ -3,7 +3,7 @@ package resourcesSystem;
 import java.lang.reflect.Field;
 
 public class ReflectionHelper {
-    public static Object createIntance(String className) {
+    public static Object createInstance(String className) {
         Class clazz = null;
         try {
             clazz = Class.forName(className);

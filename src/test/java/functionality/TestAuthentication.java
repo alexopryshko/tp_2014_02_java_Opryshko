@@ -10,7 +10,7 @@ public class TestAuthentication extends TestFunctional {
     public void testAuthenticationWithCorrectData() {
         login = "admin";
         password = "admin";
-        boolean res = functionalTest(ip, login, password);
+        boolean res = functionalTest(ip, login, password, "user");
         Assert.assertTrue(res);
     }
 
@@ -18,7 +18,7 @@ public class TestAuthentication extends TestFunctional {
     public void testAuthenticationWithIncorrectData() {
         login = generateString(10);
         password = generateString(10);
-        boolean res = functionalTest(ip, login, password);
+        boolean res = functionalTest(ip, login, password, "user");
         Assert.assertFalse(res);
     }
 }

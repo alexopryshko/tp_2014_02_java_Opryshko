@@ -11,15 +11,15 @@ public class TestRegistration extends TestFunctional{
     public void testRegistrationWithCorrectData() {
         login = generateString(10);
         password = generateString(10);
-        boolean res = functionalTest(ip, login, password);
-        Assert.assertTrue(res);
+        boolean res = functionalTest(ip, login, password, "userExist");
+        Assert.assertFalse(res);
     }
 
     @Test
     public void testRegistrationWithIncorrectData() {
         login = "admin";
         password = "admin";
-        boolean res = functionalTest(ip, login, password);
-        Assert.assertFalse(res);
+        boolean res = functionalTest(ip, login, password, "userExist");
+        Assert.assertTrue(res);
     }
 }

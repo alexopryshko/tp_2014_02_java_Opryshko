@@ -27,7 +27,7 @@ public class SAXHandler extends DefaultHandler {
         else{
             String className = attributes.getValue(0);
             System.out.println("Class name: " + className);
-            object = ReflectionHelper.createIntance(className);
+            object = ReflectionHelper.createInstance(className);
         }
     }
 

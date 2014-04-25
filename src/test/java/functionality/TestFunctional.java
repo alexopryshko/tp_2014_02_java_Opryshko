@@ -1,6 +1,8 @@
 package functionality;
 
 import com.sun.istack.internal.NotNull;
+import helper.TimeHelper;
+import main.ResourcesSystem;
 import org.eclipse.jetty.server.Server;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -22,6 +24,7 @@ public abstract class TestFunctional {
 
     @BeforeClass
     public static void setUp() throws Exception {
+        ResourcesSystem.init("", "data/");
         server = createServer(PORT);
         server.start();
     }
@@ -31,7 +34,7 @@ public abstract class TestFunctional {
         server.stop();
     }
 
-    protected boolean functionalTest(@NotNull String ip, @NotNull String login, @NotNull String password) {
+    protected boolean functionalTest(@NotNull String ip, @NotNull String login, @NotNull String password, final String element) {
         WebDriver driver = new HtmlUnitDriver();
 
         driver.get(ip);
@@ -43,6 +46,9 @@ public abstract class TestFunctional {
         WebElement Button = driver.findElement(By.name("button"));
         Button.submit();
 
+        TimeHelper.sleep(5000);
+        driver.get(ip);
+
         boolean result;
         try {
             result = (new WebDriverWait(driver, 1)).until(new ExpectedCondition<Boolean>() {
@@ -51,7 +57,7 @@ public abstract class TestFunctional {
                 public Boolean apply(@NotNull WebDriver d) {
                     WebElement el;
                     try {
-                        el = d.findElement(By.id("user"));
+                        el = d.findElement(By.id(element));
                     }
                     catch (NoSuchElementException e) {
                         el = null;
