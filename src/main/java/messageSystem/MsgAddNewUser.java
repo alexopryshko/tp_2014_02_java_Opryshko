@@ -1,5 +1,6 @@
 package messageSystem;
 import account.AccountService;
+import account.RegistrationStatus;
 
 public class MsgAddNewUser extends MessageToAccountService{
 
@@ -17,6 +18,10 @@ public class MsgAddNewUser extends MessageToAccountService{
     @Override
     void exec(AccountService accountService) {
         boolean result = accountService.userRegistration(username, password);
-        accountService.getMessageSystem().sendMessage(new MsgRegistrationStatus(getTo(), getFrom(), sessionId, (result) ? 1 : 0));
+        accountService.getMessageSystem().sendMessage(new MsgRegistrationStatus(
+                getTo(),
+                getFrom(),
+                sessionId,
+                (result) ? RegistrationStatus.SUCCESS : RegistrationStatus.USER_ALREADY_EXIST));
     }
 }

@@ -1,12 +1,13 @@
 package messageSystem;
+import account.RegistrationStatus;
 import frontend.Frontend;
 
 public class MsgRegistrationStatus extends MessageToFrontend {
 
     private String sessionID;
-    private Integer status;
+    private RegistrationStatus status;
 
-    public MsgRegistrationStatus(Address from, Address to, String sessionID, Integer status) {
+    public MsgRegistrationStatus(Address from, Address to, String sessionID, RegistrationStatus status) {
         super(from, to);
         this.status = status;
         this.sessionID = sessionID;

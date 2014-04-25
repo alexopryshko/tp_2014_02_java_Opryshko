@@ -6,12 +6,12 @@ public class UserSession {
     private String name;
     private String sessionId;
     private Long userId;
-    private Integer registrationStatus;
+    private RegistrationStatus registrationStatus;
 
     public UserSession(String sessionId, String name) {
         this.sessionId = sessionId;
         this.name = name;
-        this.registrationStatus = -1; //сделать статус через enum
+        this.registrationStatus = RegistrationStatus.NOT_REGISTRATED; //сделать статус через enum
     }
 
     public String getName() {
@@ -30,11 +30,11 @@ public class UserSession {
         this.userId = userId;
     }
 
-    public Integer getRegistrationStatus() {
+    public RegistrationStatus getRegistrationStatus() {
         return registrationStatus;
     }
 
-    public void setRegistrationStatus(Integer registrationStatus) {
+    public void setRegistrationStatus(RegistrationStatus registrationStatus) {
         this.registrationStatus = registrationStatus;
     }
 }

@@ -1,5 +1,6 @@
 package frontend;
 
+import account.RegistrationStatus;
 import account.UserSession;
 import helper.TimeHelper;
 import messageSystem.*;
@@ -59,15 +60,15 @@ public class Frontend extends HttpServlet implements Subscriber, Runnable {
                         renderPage("registration.tml", response, null);
                         return;
                     }
-                    if (registrationUser.getRegistrationStatus() == -1) {
+                    if (registrationUser.getRegistrationStatus() == RegistrationStatus.NOT_REGISTRATED) {
                         renderPage("info.tml", response, "Wait for registration");
                         return;
                     }
-                    if (registrationUser.getRegistrationStatus() == 0) {
+                    if (registrationUser.getRegistrationStatus() == RegistrationStatus.USER_ALREADY_EXIST) {
                         renderPage("registration.tml", response, "Error");
                         return;
                     }
-                    if (registrationUser.getRegistrationStatus() == 1) {
+                    if (registrationUser.getRegistrationStatus() == RegistrationStatus.SUCCESS) {
                         usersToRegistration.remove(registrationUser.getSessionId());
                         response.sendRedirect("/");
                         return;
@@ -142,11 +143,11 @@ public class Frontend extends HttpServlet implements Subscriber, Runnable {
             System.out.append("Can't find user session for: ").append(sessionId);
             return;
         }
-        userSession.setRegistrationStatus(1);
+        userSession.setRegistrationStatus(RegistrationStatus.SUCCESS);
         userSession.setUserId(userId);
     }
 
-    public void setRegistrationStatus(String sessionID, Integer responseStatus) {
+    public void setRegistrationStatus(String sessionID, RegistrationStatus responseStatus) {
         UserSession userSession = usersToRegistration.get(sessionID);
         if (userSession == null) {
             System.out.append("Can't find user session for: ").append(sessionID);
