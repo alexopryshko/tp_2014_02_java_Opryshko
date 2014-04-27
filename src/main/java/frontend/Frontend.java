@@ -168,6 +168,10 @@ public class Frontend extends HttpServlet implements Subscriber, Runnable {
         userSession.setUserId(userId);
     }
 
+    public Long getId(String sessionId) {
+        return users.get(sessionId).getUserId();
+    }
+
     public void setRegistrationStatus(String sessionID, RegistrationStatus responseStatus) {
         UserSession userSession = usersToRegistration.get(sessionID);
         if (userSession == null) {

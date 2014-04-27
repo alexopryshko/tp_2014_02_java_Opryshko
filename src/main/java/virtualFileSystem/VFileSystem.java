@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 
-
 public class VFileSystem implements VFS {
 
     private String root;
@@ -56,7 +55,8 @@ public class VFileSystem implements VFS {
     @Override
     public byte[] getBytes(String file) throws IOException {
         FileInputStream fileStream = new FileInputStream(file);
-        DataInputStream dataStream = new DataInputStream(fileStream);
+        BufferedInputStream bs = new BufferedInputStream(fileStream);
+        DataInputStream dataStream = new DataInputStream(bs);
         byte[] data = new byte[fileStream.available()];
         dataStream.readFully(data);
         dataStream.close();
@@ -64,17 +64,15 @@ public class VFileSystem implements VFS {
     }
     @Override
     public String getUFT8Text(String file) throws IOException {
-        FileInputStream fs = new FileInputStream(file);
-        DataInputStream ds = new DataInputStream(fs);
-        InputStreamReader sr = new InputStreamReader(ds, "UTF-8");
-        BufferedReader br = new BufferedReader(sr);
-        StringBuilder lines = new StringBuilder();
-        String line;
-        while ((line = br.readLine()) != null)   {
-            lines.append(line);
+        FileReader fr = new FileReader(file);
+        BufferedReader br = new BufferedReader(fr);
+        StringBuilder stringBuilder = new StringBuilder();
+        String currentLine;
+        while((currentLine = br.readLine()) != null) {
+            stringBuilder.append(currentLine);
         }
         br.close();
-        return lines.toString();
+        return stringBuilder.toString();
     }
     @Override
     public Iterator<String> getIterator(String startDir) {

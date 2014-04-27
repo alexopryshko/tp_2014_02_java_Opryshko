@@ -20,12 +20,7 @@ public class ResourceFactory {
     }
 
     public Resource getResource(String path) {
-        try {
-            return resources.get(path);
-        }
-        catch (NullPointerException e) {
-            return null;
-        }
+        return resources.get(path);
     }
 
     private ResourceFactory() { }

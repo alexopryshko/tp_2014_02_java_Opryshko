@@ -9,6 +9,7 @@ public class SAXHandler extends DefaultHandler {
     private String element = null;
     private Object object = null;
 
+    @Override
     public void startDocument() throws SAXException {
         System.out.println("Start document");
     }
