@@ -1,6 +1,5 @@
 package functionality;
 
-import com.sun.istack.internal.NotNull;
 import helper.TimeHelper;
 import main.ResourcesSystem;
 import org.eclipse.jetty.server.Server;
@@ -34,7 +33,7 @@ public abstract class TestFunctional {
         server.stop();
     }
 
-    protected boolean functionalTest(@NotNull String ip, @NotNull String login, @NotNull String password, final String element) {
+    protected boolean functionalTest(String ip, String login, String password, final String element) {
         WebDriver driver = new HtmlUnitDriver();
 
         driver.get(ip);
@@ -53,8 +52,7 @@ public abstract class TestFunctional {
         try {
             result = (new WebDriverWait(driver, 1)).until(new ExpectedCondition<Boolean>() {
                 @Override
-                @NotNull
-                public Boolean apply(@NotNull WebDriver d) {
+                public Boolean apply(WebDriver d) {
                     WebElement el;
                     try {
                         el = d.findElement(By.id(element));
